@@ -1,1 +1,9 @@
 C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\bin\Debug\RSA_Operativos.exe.config
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\bin\Debug\RSA_Operativos.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\bin\Debug\RSA_Operativos.pdb
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\obj\Debug\RSA_Operativos.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\obj\Debug\RSA_Operativos.RSA.resources
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\obj\Debug\RSA_Operativos.Properties.Resources.resources
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\obj\Debug\RSA_Operativos.csproj.GenerateResource.Cache
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\obj\Debug\RSA_Operativos.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\RSA_Operativos\RSA_Operativos\obj\Debug\RSA_Operativos.pdb

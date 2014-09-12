@@ -16,7 +16,7 @@ namespace RSA_Operativos
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new RSA());
         }
     }
 }
