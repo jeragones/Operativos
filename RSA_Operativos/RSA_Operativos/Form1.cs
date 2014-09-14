@@ -12,6 +12,9 @@ namespace RSA_Operativos
 {
     public partial class RSA : Form
     {
+
+        RSA_Class rsa = new RSA_Class();
+
         public RSA()
         {
             InitializeComponent();
@@ -32,16 +35,33 @@ namespace RSA_Operativos
             string ps = txtP.Text;
             string qs = txtQ.Text;
             string m = txtPlano.Text;
-            txtEncrip.Text = m;
+            
+             int p =0;
+             int q =0;
+
             try
             {
-                int p = Convert.ToInt32(ps);
-                int q = Convert.ToInt32(qs);
+                p = Convert.ToInt32(ps);
+                q = Convert.ToInt32(qs);
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+
+
+            rsa.generar_public(p,q);          
+            string c = "";
+            char[] letras =m.ToCharArray();
+            progres.Maximum = letras.Length-1;
+            for (int i = 0; i < letras.Length; i++)
+            {
+                progres.Value = i;
+                c = c + Convert.ToChar(rsa.EncriptarRSA(p, q, letras[i]));
+            }
+                
+            txtEncrip.Text = c;
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
@@ -64,6 +84,43 @@ namespace RSA_Operativos
         }
 
         private void btnDesen_Click(object sender, EventArgs e)
+        {
+            string ps = txtP.Text;
+            string qs = txtQ.Text;
+            string m = txtEncrip.Text;
+
+            int p = 0;
+            int q = 0;
+
+            try
+            {
+                p = Convert.ToInt32(ps);
+                q = Convert.ToInt32(qs);
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            rsa.generar_private(p, q);
+            string c = "";
+            char[] letras = m.ToCharArray();
+            progres.Maximum = letras.Length - 1;
+            for (int i = 0; i < letras.Length; i++)
+            {
+                progres.Value = i;   
+                c = c + Convert.ToChar(rsa.DesEncriptarRSA(p, q, letras[i])); 
+            }
+            txtDesen.Text = c;
+
+        }
+
+        private void RSA_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDesen_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -41,10 +41,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.txtPlano = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuStrip1.SuspendLayout();
+            this.progres = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // label1
@@ -102,6 +99,7 @@
             this.txtDesen.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtDesen.Size = new System.Drawing.Size(675, 119);
             this.txtDesen.TabIndex = 5;
+            this.txtDesen.TextChanged += new System.EventHandler(this.txtDesen_TextChanged);
             // 
             // txtP
             // 
@@ -165,36 +163,19 @@
             this.txtPlano.Size = new System.Drawing.Size(675, 105);
             this.txtPlano.TabIndex = 13;
             // 
-            // menuStrip1
+            // progres
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.archivoToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(702, 24);
-            this.menuStrip1.TabIndex = 14;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // archivoToolStripMenuItem
-            // 
-            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.abrirToolStripMenuItem});
-            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
-            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
-            this.archivoToolStripMenuItem.Text = "Archivo";
-            // 
-            // abrirToolStripMenuItem
-            // 
-            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.abrirToolStripMenuItem.Text = "Abrir";
-            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click);
+            this.progres.Location = new System.Drawing.Point(12, 479);
+            this.progres.Name = "progres";
+            this.progres.Size = new System.Drawing.Size(675, 23);
+            this.progres.TabIndex = 14;
             // 
             // RSA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(702, 482);
+            this.ClientSize = new System.Drawing.Size(702, 507);
+            this.Controls.Add(this.progres);
             this.Controls.Add(this.txtPlano);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -208,12 +189,9 @@
             this.Controls.Add(this.txtEncrip);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "RSA";
             this.Text = "Cifrado RSA";
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.Load += new System.EventHandler(this.RSA_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,9 +212,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtPlano;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.ProgressBar progres;
     }
 }
 
