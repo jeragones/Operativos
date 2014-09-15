@@ -52,6 +52,7 @@ public class Principal extends javax.swing.JFrame {
         txtQ = new javax.swing.JTextField();
         btnDesen = new javax.swing.JButton();
         btnEncrip = new javax.swing.JButton();
+        txtTiempo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -136,7 +137,9 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtQ, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                        .addGap(34, 34, 34)
+                        .addComponent(txtTiempo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
                         .addComponent(btnEncrip)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDesen))
@@ -154,7 +157,8 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(txtQ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDesen)
-                    .addComponent(btnEncrip))
+                    .addComponent(btnEncrip)
+                    .addComponent(txtTiempo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -215,13 +219,18 @@ public class Principal extends javax.swing.JFrame {
         char[] letras = plano.toCharArray();
         rsa.publicKey(p, q);
         String C="";
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
+
+
         for (int i = 0; i < letras.length; i++)
             {
                 
                 C += (char)(rsa.EncriptarRSA(letras[i]));
             }
-                
-            txtEncrip.setText(C);
+        time_end = System.currentTimeMillis();    
+        txtTiempo.setText("Tiempo: "+(time_end-time_start)/1000 + " Segundos");
+        txtEncrip.setText(C);
         
         
         
@@ -235,13 +244,17 @@ public class Principal extends javax.swing.JFrame {
         char[] letras = plano.toCharArray();
         rsa.privatekey(p, q);
         String C="";
+        long time_start, time_end;
+        time_start = System.currentTimeMillis();
+
         for (int i = 0; i < letras.length; i++)
             {
                 
                 C += (char)(rsa.DesencriptarRSA(letras[i]));
             }
-                
-            txtDesen.setText(C);
+        time_end = System.currentTimeMillis();    
+        txtTiempo.setText("Tiempo: "+(time_end-time_start)/1000 + " Segundos");        
+        txtDesen.setText(C);
     }//GEN-LAST:event_btnDesenActionPerformed
 
     /**
@@ -299,5 +312,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JTextField txtP;
     private javax.swing.JTextArea txtPlano;
     private javax.swing.JTextField txtQ;
+    private javax.swing.JLabel txtTiempo;
     // End of variables declaration//GEN-END:variables
 }
