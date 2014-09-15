@@ -106,7 +106,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane3" pref="110" max="32767" attributes="0"/>
+              <Component id="jScrollPane3" pref="134" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -187,6 +187,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Desencriptar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDesenActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEncrip">
       <Properties>

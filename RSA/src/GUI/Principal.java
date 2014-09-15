@@ -12,6 +12,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import rsa.Cifrado_RSA;
 
 /**
  *
@@ -82,6 +83,11 @@ public class Principal extends javax.swing.JFrame {
         jLabel5.setText("Q:");
 
         btnDesen.setText("Desencriptar");
+        btnDesen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDesenActionPerformed(evt);
+            }
+        });
 
         btnEncrip.setText("Encriptar");
         btnEncrip.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +166,7 @@ public class Principal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -200,24 +206,43 @@ public class Principal extends javax.swing.JFrame {
           }
         txtPlano.setText(texto);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
+    Cifrado_RSA rsa = new Cifrado_RSA();
     private void btnEncripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncripActionPerformed
         // TODO add your handling code here:
-        //String p= "";
-        //String q="";
-        int p=0;
-        int q=0;
-        try{
-            p=Integer.parseInt(txtP.getText());
-            q=Integer.parseInt(txtQ.getText());
-        }
-        catch(Exception ex){
-            System.err.println(ex.getMessage());
-        }
+        String p= txtP.getText();
+        String q=txtQ.getText();
+        String plano=txtPlano.getText();
+        char[] letras = plano.toCharArray();
+        rsa.publicKey(p, q);
+        String C="";
+        for (int i = 0; i < letras.length; i++)
+            {
+                
+                C += (char)(rsa.EncriptarRSA(letras[i]));
+            }
+                
+            txtEncrip.setText(C);
         
         
         
     }//GEN-LAST:event_btnEncripActionPerformed
+
+    private void btnDesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesenActionPerformed
+        // TODO add your handling code here:
+        String p= txtP.getText();
+        String q=txtQ.getText();
+        String plano=txtEncrip.getText();
+        char[] letras = plano.toCharArray();
+        rsa.privatekey(p, q);
+        String C="";
+        for (int i = 0; i < letras.length; i++)
+            {
+                
+                C += (char)(rsa.DesencriptarRSA(letras[i]));
+            }
+                
+            txtDesen.setText(C);
+    }//GEN-LAST:event_btnDesenActionPerformed
 
     /**
      * @param args the command line arguments
