@@ -37,12 +37,18 @@ namespace RSA_Operativos
             
             char[] letras = m.ToCharArray();
             string encrip = "";
-
+            //var timer = Stopwatch.StartNew();
+            DateTime ini = DateTime.Now;
+            progres.Maximum = letras.Length;
+            progres.Step = 1;
             for (int i = 0; i < letras.Length;i++ )
             {
+                progres.PerformStep();
                 encrip += rc4.RC4(Convert.ToString(letras[i]), pass);
             }
-
+            DateTime fin = DateTime.Now;
+            TimeSpan time = new TimeSpan(fin.Ticks - ini.Ticks);
+            txtTiempo.Text = "Tiempo: "+time.ToString();
             txtEncrip.Text = encrip;
 
             
@@ -56,18 +62,23 @@ namespace RSA_Operativos
 
         private void btnDesen_Click(object sender, EventArgs e)
         {
-
+            
             string m = txtEncrip.Text;
             string pass = txtPass.Text;
 
             char[] letras = m.ToCharArray();
             string encrip = "";
-
+            DateTime ini = DateTime.Now;
+            progres.Maximum = letras.Length;
+            progres.Value = 1;
             for (int i = 0; i < letras.Length; i++)
             {
+                progres.PerformStep();
                 encrip += rc4.RC4(Convert.ToString(letras[i]), pass);
             }
-
+            DateTime fin = DateTime.Now;
+            TimeSpan time = new TimeSpan(fin.Ticks - ini.Ticks);
+            txtTiempo.Text = "Tiempo: " + time.ToString();
             txtDesen.Text = encrip;
 
             
@@ -101,6 +112,11 @@ namespace RSA_Operativos
                 texto = sr.ReadToEnd();
             }
             txtPlano.Text = texto;
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

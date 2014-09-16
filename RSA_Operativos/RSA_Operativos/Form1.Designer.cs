@@ -43,6 +43,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtTiempo = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -143,7 +144,7 @@
             // 
             this.txtPass.Location = new System.Drawing.Point(156, 27);
             this.txtPass.Name = "txtPass";
-            this.txtPass.Size = new System.Drawing.Size(100, 20);
+            this.txtPass.Size = new System.Drawing.Size(177, 20);
             this.txtPass.TabIndex = 15;
             // 
             // label4
@@ -180,11 +181,22 @@
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click_1);
             // 
+            // txtTiempo
+            // 
+            this.txtTiempo.AutoSize = true;
+            this.txtTiempo.Location = new System.Drawing.Point(339, 28);
+            this.txtTiempo.Name = "txtTiempo";
+            this.txtTiempo.Size = new System.Drawing.Size(48, 13);
+            this.txtTiempo.TabIndex = 18;
+            this.txtTiempo.Text = "Tiempo: ";
+            this.txtTiempo.Click += new System.EventHandler(this.label5_Click);
+            // 
             // RSA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 507);
+            this.Controls.Add(this.txtTiempo);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtPass);
             this.Controls.Add(this.progres);
@@ -226,6 +238,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
+        private System.Windows.Forms.Label txtTiempo;
     }
 }
 
