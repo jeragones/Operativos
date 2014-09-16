@@ -34,14 +34,16 @@
             this.txtEncrip = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txtDesen = new System.Windows.Forms.TextBox();
-            this.txtP = new System.Windows.Forms.TextBox();
-            this.txtQ = new System.Windows.Forms.TextBox();
             this.btnEncrip = new System.Windows.Forms.Button();
             this.btnDesen = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.txtPlano = new System.Windows.Forms.TextBox();
             this.progres = new System.Windows.Forms.ProgressBar();
+            this.txtPass = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.archivoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.abrirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -101,21 +103,6 @@
             this.txtDesen.TabIndex = 5;
             this.txtDesen.TextChanged += new System.EventHandler(this.txtDesen_TextChanged);
             // 
-            // txtP
-            // 
-            this.txtP.Location = new System.Drawing.Point(130, 25);
-            this.txtP.Name = "txtP";
-            this.txtP.Size = new System.Drawing.Size(56, 20);
-            this.txtP.TabIndex = 7;
-            this.txtP.TextChanged += new System.EventHandler(this.txtP_TextChanged);
-            // 
-            // txtQ
-            // 
-            this.txtQ.Location = new System.Drawing.Point(216, 25);
-            this.txtQ.Name = "txtQ";
-            this.txtQ.Size = new System.Drawing.Size(56, 20);
-            this.txtQ.TabIndex = 8;
-            // 
             // btnEncrip
             // 
             this.btnEncrip.Location = new System.Drawing.Point(531, 45);
@@ -136,24 +123,6 @@
             this.btnDesen.UseVisualStyleBackColor = true;
             this.btnDesen.Click += new System.EventHandler(this.btnDesen_Click);
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(107, 27);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(17, 13);
-            this.label4.TabIndex = 11;
-            this.label4.Text = "P:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(192, 28);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(18, 13);
-            this.label5.TabIndex = 12;
-            this.label5.Text = "Q:";
-            // 
             // txtPlano
             // 
             this.txtPlano.Location = new System.Drawing.Point(12, 74);
@@ -170,28 +139,71 @@
             this.progres.Size = new System.Drawing.Size(675, 23);
             this.progres.TabIndex = 14;
             // 
+            // txtPass
+            // 
+            this.txtPass.Location = new System.Drawing.Point(156, 27);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.Size = new System.Drawing.Size(100, 20);
+            this.txtPass.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(89, 27);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(61, 13);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "Contraseña";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.archivoToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(702, 24);
+            this.menuStrip1.TabIndex = 17;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // archivoToolStripMenuItem
+            // 
+            this.archivoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.abrirToolStripMenuItem});
+            this.archivoToolStripMenuItem.Name = "archivoToolStripMenuItem";
+            this.archivoToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
+            this.archivoToolStripMenuItem.Text = "Archivo";
+            // 
+            // abrirToolStripMenuItem
+            // 
+            this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirToolStripMenuItem.Text = "Abrir";
+            this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click_1);
+            // 
             // RSA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(702, 507);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtPass);
             this.Controls.Add(this.progres);
             this.Controls.Add(this.txtPlano);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.btnDesen);
             this.Controls.Add(this.btnEncrip);
-            this.Controls.Add(this.txtQ);
-            this.Controls.Add(this.txtP);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtDesen);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtEncrip);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "RSA";
-            this.Text = "Cifrado RSA";
+            this.Text = "Cifrado RC4";
             this.Load += new System.EventHandler(this.RSA_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -205,14 +217,15 @@
         private System.Windows.Forms.TextBox txtEncrip;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtDesen;
-        private System.Windows.Forms.TextBox txtP;
-        private System.Windows.Forms.TextBox txtQ;
         private System.Windows.Forms.Button btnEncrip;
         private System.Windows.Forms.Button btnDesen;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtPlano;
         private System.Windows.Forms.ProgressBar progres;
+        private System.Windows.Forms.TextBox txtPass;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem archivoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem abrirToolStripMenuItem;
     }
 }
 
