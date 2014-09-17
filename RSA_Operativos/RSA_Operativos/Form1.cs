@@ -40,7 +40,23 @@ namespace RSA_Operativos
             //var timer = Stopwatch.StartNew();
             DateTime ini = DateTime.Now;
             progres.Maximum = letras.Length;
+            progres.Value = 1;
             progres.Step = 1;
+            if (paralel.Checked)
+            {
+                Parallel.For(0, letras.Length, i =>
+                {
+                    encrip += rc4.RC4(Convert.ToString(letras[i]), pass);
+                });
+            }
+            else
+            {
+                for (int i = 0; i < letras.Length; i++)
+                {
+                    progres.PerformStep();
+                    encrip += rc4.RC4(Convert.ToString(letras[i]), pass);
+                }
+            }
             for (int i = 0; i < letras.Length;i++ )
             {
                 progres.PerformStep();
@@ -71,10 +87,20 @@ namespace RSA_Operativos
             DateTime ini = DateTime.Now;
             progres.Maximum = letras.Length;
             progres.Value = 1;
-            for (int i = 0; i < letras.Length; i++)
+            if (paralel.Checked)
             {
-                progres.PerformStep();
-                encrip += rc4.RC4(Convert.ToString(letras[i]), pass);
+                Parallel.For(0, letras.Length, i =>
+                {
+                    encrip += rc4.RC4(Convert.ToString(letras[i]), pass);
+                });
+            }
+            else
+            {
+                for (int i = 0; i < letras.Length; i++)
+                {
+                    progres.PerformStep();
+                    encrip += rc4.RC4(Convert.ToString(letras[i]), pass);
+                }
             }
             DateTime fin = DateTime.Now;
             TimeSpan time = new TimeSpan(fin.Ticks - ini.Ticks);

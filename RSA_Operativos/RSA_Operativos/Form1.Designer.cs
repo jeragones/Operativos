@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.paralel = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtEncrip = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -56,15 +56,15 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Texto a Encriptar";
             // 
-            // checkBox1
+            // paralel
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 27);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(64, 17);
-            this.checkBox1.TabIndex = 2;
-            this.checkBox1.Text = "Paralelo";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.paralel.AutoSize = true;
+            this.paralel.Location = new System.Drawing.Point(12, 27);
+            this.paralel.Name = "paralel";
+            this.paralel.Size = new System.Drawing.Size(64, 17);
+            this.paralel.TabIndex = 2;
+            this.paralel.Text = "Paralelo";
+            this.paralel.UseVisualStyleBackColor = true;
             // 
             // label2
             // 
@@ -177,7 +177,7 @@
             // abrirToolStripMenuItem
             // 
             this.abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.abrirToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.abrirToolStripMenuItem.Text = "Abrir";
             this.abrirToolStripMenuItem.Click += new System.EventHandler(this.abrirToolStripMenuItem_Click_1);
             // 
@@ -207,7 +207,7 @@
             this.Controls.Add(this.txtDesen);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtEncrip);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.paralel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -224,7 +224,7 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox paralel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEncrip;
         private System.Windows.Forms.Label label3;
