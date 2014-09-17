@@ -40,5 +40,53 @@ namespace RSA_Operativos
             }
             return result.ToString();
         }
+        public string RC4Secuencial(string m, string p)
+        {
+             char[] letras = m.ToCharArray();
+             string encrip = "";
+             for (int i = 0; i < letras.Length; i++)
+                {
+                    
+                    encrip += RC4(Convert.ToString(letras[i]), p);
+                }
+             return encrip;
+        }
+
+        public string RC4Paralelo(string m, string p)
+        {
+
+            string Mitad1;
+            string Mitad2;
+            int largoTexto = m.Count();
+            int iMitad = largoTexto / 2;
+            Mitad1 = m.Substring(0, iMitad);
+            Mitad2 = m.Substring(iMitad, iMitad);
+
+
+            char[] letras1 = Mitad1.ToCharArray();
+            char[] letras2 = Mitad2.ToCharArray();
+            string encrip = "";
+            string Result1 = "";
+            string Result2 = "";
+            Parallel.Invoke(() =>
+                {
+                    for (int i = 0; i < letras1.Length; i++)
+                    {
+
+                        Result1 += RC4(Convert.ToString(letras1[i]), p);
+                    }
+                }, //close second Action
+                () =>
+                {
+                    for (int i = 0; i < letras1.Length; i++)
+                    {
+
+                        Result2 += RC4(Convert.ToString(letras2[i]), p);
+                    }
+                } //close third Action
+           ); //close parallel.invoke
+            encrip = Result1 + Result2;
+            return encrip;
+        }
     }
 }
