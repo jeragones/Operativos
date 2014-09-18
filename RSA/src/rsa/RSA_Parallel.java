@@ -10,6 +10,8 @@ package rsa;
  *
  * @author Daniel
  */
-public class RSA_Parallel {
+public class RSA_Parallel extends Thread{
+    
+    
     
 }
