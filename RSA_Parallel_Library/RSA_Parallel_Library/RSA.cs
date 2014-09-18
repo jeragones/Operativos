@@ -14,11 +14,22 @@ namespace RSA_Parallel_Library
         int[] publick = new int[2];
         int[] privatek = new int[2];
 
+        /// <summary>
+        /// Determina el maximo comun divisor
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <returns></returns>
         static int GCD(int a, int b)
         {
             return b == 0 ? a : GCD(b, a % b);
         }
 
+        /// <summary>
+        /// Genera la clave publica
+        /// </summary>
+        /// <param name="p">entero primo</param>
+        /// <param name="q">entero primo</param>
         public void publicKey(int p, int q)
         {
             int n = p * q;
@@ -38,6 +49,11 @@ namespace RSA_Parallel_Library
             publick[1] = n;
         }
 
+        /// <summary>
+        /// Genera Clave privada
+        /// </summary>
+        /// <param name="p">entero primo</param>
+        /// <param name="q">entero primo</param>
         public void privateKey(int p, int q)
         {
             int n = p * q;
@@ -57,6 +73,11 @@ namespace RSA_Parallel_Library
             privatek[1] = n;
         }
 
+        /// <summary>
+        /// encripta un caragter utilizando la clave publica
+        /// </summary>
+        /// <param name="m">valor ascii del carácter</param>
+        /// <returns></returns>
         public int Encriptar(int m)
         {
             uint k = Convert.ToUInt32(publick[0]);
@@ -66,6 +87,11 @@ namespace RSA_Parallel_Library
             return Convert.ToInt32(cs);
         }
 
+        /// <summary>
+        /// Desencripta un caragter utilizando la clave privada
+        /// </summary>
+        /// <param name="m">valor ascii del carácter</param>
+        /// <returns></returns>
         public int Desencriptar(int m)
         {
             uint d = Convert.ToUInt32(privatek[0]);
@@ -75,6 +101,12 @@ namespace RSA_Parallel_Library
             return Convert.ToInt32(cs);
         }
 
+        /// <summary>
+        /// encripta de manera secuencial una cadena de texto
+        /// crea un char[] de todos los caracteres de la cadena y le envia el valor ascii de cada char al metodo Encriptar
+        /// </summary>
+        /// <param name="txt">cadena a encriptar</param>
+        /// <returns></returns>
         public string EncrRSASecuencial(string txt)
         {
             char[] letras = txt.ToCharArray();
@@ -87,6 +119,12 @@ namespace RSA_Parallel_Library
             return C;
         }
 
+        /// <summary>
+        /// desencripta de manera secuencial una cadena de texto
+        /// crea un char[] de todos los caracteres de la cadena y le envia el valor ascii de cada char al metodo Desencriptar
+        /// </summary>
+        /// <param name="txt">cadena a desencriptar</param>
+        /// <returns></returns>
         public string DesenRSASecuencial(string txt)
         {
             char[] letras = txt.ToCharArray();
@@ -99,20 +137,46 @@ namespace RSA_Parallel_Library
             return C;
         }
 
-        public static IEnumerable<string> SplitByLength(string str, int maxLength)
+        /// <summary>
+        /// toma una cadena y la divide en n partes
+        /// </summary>
+        /// <param name="txt">cadena</param>
+        /// <param name="n">numero de divisiones solicitadas</param>
+        /// <returns></returns>
+        public string[] splicer(string txt, int n) 
         {
-            for (int index = 0; index < str.Length; index += maxLength)
+            string[] partes = new string[n+1];
+            
+            int start = 0;
+            int x = 0;
+            //int parts = 5;
+            int size = txt.Length / n ;
+
+            while (start < txt.Length)
             {
-                yield return str.Substring(index, Math.Min(maxLength, str.Length - index));
+                int end = start + size < txt.Length ? size : txt.Length - start;
+                partes[x]=(txt.Substring(start, end));
+                start += size;
+                x += 1;
             }
+            return partes;
         }
 
+        /// <summary>
+        /// Encripta una cadena de manera paralela
+        /// </summary>
+        /// <param name="txt">cadena a eencriptar</param>
+        /// <returns></returns>
         public string EncrRSAParalelo(string txt)
         {
-            int cores = Environment.ProcessorCount;
-            IEnumerable<string> texto = SplitByLength(txt, cores);
-            string[] t = texto.ToArray();
+            
+            int cores = 2;//Environment.ProcessorCount;
+            /* si utiliza el numero de cores del procesador para dividir el texto y hacer varias
+               llamadas en paralelo del metodo encriptar, el tiempo de ejecucion es mas prolongado*/
+            
+            string[] t = splicer(txt,cores);
             string res = "";
+            // crea n llamadas en paralelo dependiendo del numero de cores 
             if (cores == 4) 
             {
                 String c1="", c2="", c3="", c4 = "" ;
@@ -120,7 +184,6 @@ namespace RSA_Parallel_Library
                 {
                     for (int i = 0; i < t[0].ToCharArray().Length; i++)
                     {
-
                         c1 += (char)(Encriptar(t[0].ToCharArray()[i]));
                     }
                 },
@@ -128,7 +191,6 @@ namespace RSA_Parallel_Library
                 {
                     for (int i = 0; i < t[1].ToCharArray().Length; i++)
                     {
-
                         c2 += (char)(Encriptar(t[1].ToCharArray()[i]));
                     }
                 },
@@ -136,7 +198,6 @@ namespace RSA_Parallel_Library
                 {
                     for (int i = 0; i < t[2].ToCharArray().Length; i++)
                     {
-
                         c3 += (char)(Encriptar(t[2].ToCharArray()[i]));
                     }
                 },
@@ -144,22 +205,123 @@ namespace RSA_Parallel_Library
                 {
                     for (int i = 0; i < t[3].ToCharArray().Length; i++)
                     {
-
-                        c3 += (char)(Encriptar(t[3].ToCharArray()[i]));
+                        c4 += (char)(Encriptar(t[3].ToCharArray()[i]));
                     }
                 }
                 );
                 res = c1+c2+c3+c4;
             }
-            if (cores == 6) 
+            else if(cores == 6) 
             {
-
+                String c1 = "", c2 = "", c3 = "", c4 = "",c5="",c6="";
+                Parallel.Invoke(() =>
+                {
+                    for (int i = 0; i < t[0].ToCharArray().Length; i++)
+                    {
+                        c1 += (char)(Encriptar(t[0].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[1].ToCharArray().Length; i++)
+                    {
+                        c2 += (char)(Encriptar(t[1].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[2].ToCharArray().Length; i++)
+                    {
+                        c3 += (char)(Encriptar(t[2].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[3].ToCharArray().Length; i++)
+                    {
+                        c4 += (char)(Encriptar(t[3].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[4].ToCharArray().Length; i++)
+                    {
+                        c5 += (char)(Encriptar(t[4].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[5].ToCharArray().Length; i++)
+                    {
+                        c6 += (char)(Encriptar(t[5].ToCharArray()[i]));
+                    }
+                }
+                );
+                res = c1 + c2 + c3 + c4 + c5 + c6;
             }
-            if (cores == 8)
+            else if (cores == 8)
             {
-
+                String c1 = "", c2 = "", c3 = "", c4 = "", c5 = "", c6 = "", c7 = "", c8 = "";
+                Parallel.Invoke(() =>
+                {
+                    for (int i = 0; i < t[0].ToCharArray().Length; i++)
+                    {
+                        c1 += (char)(Encriptar(t[0].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[1].ToCharArray().Length; i++)
+                    {
+                        c2 += (char)(Encriptar(t[1].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[2].ToCharArray().Length; i++)
+                    {
+                        c3 += (char)(Encriptar(t[2].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[3].ToCharArray().Length; i++)
+                    {
+                        c4 += (char)(Encriptar(t[3].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[4].ToCharArray().Length; i++)
+                    {
+                        c5 += (char)(Encriptar(t[4].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[5].ToCharArray().Length; i++)
+                    {
+                        c6 += (char)(Encriptar(t[5].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[6].ToCharArray().Length; i++)
+                    {
+                        c7 += (char)(Encriptar(t[6].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[7].ToCharArray().Length; i++)
+                    {
+                        c8 += (char)(Encriptar(t[7].ToCharArray()[i]));
+                    }
+                }
+                );
+                res = c1 + c2 + c3 + c4 + c5 + c6+ c7 +c8;
             }
-            /*else {
+            else {
                 string Mitad1;
                 string Mitad2;
                 int largoTexto = txt.Count();
@@ -189,48 +351,198 @@ namespace RSA_Parallel_Library
                 });
                 res= C1 + C2;
             
-            }*/
+            }
             return res;
-            
-            
-            
-            
-            
         }
 
+        /// <summary>
+        /// Desencripta de manera paralela una cadena
+        /// </summary>
+        /// <param name="txt">cadena a desencriptar</param>
+        /// <returns></returns>
         public string DesenRSAParalelo(string txt)
         {
-            string Mitad1;
-            string Mitad2;
-            int largoTexto = txt.Count();
-            int iMitad = largoTexto / 2;
-            Mitad1 = txt.Substring(0, iMitad);
-            Mitad2 = txt.Substring(iMitad, iMitad);
+            int cores = 2;//Environment.ProcessorCount;
+            /* si utiliza el numero de cores del procesador para dividir el texto y hacer varias
+               llamadas en paralelo del metodo encriptar, el tiempo de ejecucion es mas prolongado*/
 
-            char[] letras1 = Mitad1.ToCharArray();
-            char[] letras2 = Mitad2.ToCharArray();
-            String C1 = "";
-            String C2 = "";
-
-            Parallel.Invoke(() =>
+            string[] t = splicer(txt, cores);
+            string res = "";
+            if (cores == 4)
             {
-                for (int i = 0; i < letras1.Length; i++)
+                String c1 = "", c2 = "", c3 = "", c4 = "";
+                Parallel.Invoke(() =>
                 {
-
-                    C1 += (char)(Desencriptar(letras1[i]));
+                    for (int i = 0; i < t[0].ToCharArray().Length; i++)
+                    {
+                        c1 += (char)(Desencriptar(t[0].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[1].ToCharArray().Length; i++)
+                    {
+                        c2 += (char)(Desencriptar(t[1].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[2].ToCharArray().Length; i++)
+                    {
+                        c3 += (char)(Desencriptar(t[2].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[3].ToCharArray().Length; i++)
+                    {
+                        c4 += (char)(Desencriptar(t[3].ToCharArray()[i]));
+                    }
                 }
-
-            },
-            () =>
+                );
+                res = c1 + c2 + c3 + c4;
+            }
+            else if (cores == 6)
             {
-                for (int i = 0; i < letras2.Length; i++)
+                String c1 = "", c2 = "", c3 = "", c4 = "", c5 = "", c6 = "";
+                Parallel.Invoke(() =>
                 {
-
-                    C2 += (char)(Desencriptar(letras2[i]));
+                    for (int i = 0; i < t[0].ToCharArray().Length; i++)
+                    {
+                        c1 += (char)(Desencriptar(t[0].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[1].ToCharArray().Length; i++)
+                    {
+                        c2 += (char)(Desencriptar(t[1].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[2].ToCharArray().Length; i++)
+                    {
+                        c3 += (char)(Desencriptar(t[2].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[3].ToCharArray().Length; i++)
+                    {
+                        c4 += (char)(Desencriptar(t[3].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[4].ToCharArray().Length; i++)
+                    {
+                        c5 += (char)(Desencriptar(t[4].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[5].ToCharArray().Length; i++)
+                    {
+                        c6 += (char)(Desencriptar(t[5].ToCharArray()[i]));
+                    }
                 }
-            });
+                );
+                res = c1 + c2 + c3 + c4 + c5 + c6;
+            }
+            else if (cores == 8)
+            {
+                String c1 = "", c2 = "", c3 = "", c4 = "", c5 = "", c6 = "", c7 = "", c8 = "";
+                Parallel.Invoke(() =>
+                {
+                    for (int i = 0; i < t[0].ToCharArray().Length; i++)
+                    {
+                        c1 += (char)(Desencriptar(t[0].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[1].ToCharArray().Length; i++)
+                    {
+                        c2 += (char)(Desencriptar(t[1].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[2].ToCharArray().Length; i++)
+                    {
+                        c3 += (char)(Desencriptar(t[2].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[3].ToCharArray().Length; i++)
+                    {
+                        c4 += (char)(Desencriptar(t[3].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[4].ToCharArray().Length; i++)
+                    {
+                        c5 += (char)(Desencriptar(t[4].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[5].ToCharArray().Length; i++)
+                    {
+                        c6 += (char)(Desencriptar(t[5].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[6].ToCharArray().Length; i++)
+                    {
+                        c7 += (char)(Desencriptar(t[6].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[7].ToCharArray().Length; i++)
+                    {
+                        c8 += (char)(Desencriptar(t[7].ToCharArray()[i]));
+                    }
+                }
+                );
+                res = c1 + c2 + c3 + c4 + c5 + c6 + c7 + c8;
+            }
+            else
+            {
+                string Mitad1;
+                string Mitad2;
+                int largoTexto = txt.Count();
+                int iMitad = largoTexto / 2;
+                Mitad1 = txt.Substring(0, iMitad);
+                Mitad2 = txt.Substring(iMitad, iMitad);
+                char[] letras1 = Mitad1.ToCharArray();
+                char[] letras2 = Mitad2.ToCharArray();
+                string C1 = "", C2 = "";
+                Parallel.Invoke(() =>
+                {
+                    for (int i = 0; i < letras1.Length; i++)
+                    {
 
-            return C1 + C2;
+                        C1 += (char)(Desencriptar(letras1[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < letras2.Length; i++)
+                    {
+
+                        C2 += (char)(Desencriptar(letras2[i]));
+                    }
+                });
+                res = C1 + C2;
+
+            }
+            return res;
         }
 
     }

@@ -63,6 +63,9 @@ namespace RSA_Parallel_Library
             timer.Stop();
             time.Text = "Tiempo: "+Convert.ToString(timer.Elapsed);
              
+            
+
+            
 
             
         }
