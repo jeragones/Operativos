@@ -220,7 +220,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.menuStrip1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Cifrado RSA";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);

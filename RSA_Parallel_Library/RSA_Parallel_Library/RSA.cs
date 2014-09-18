@@ -99,39 +99,103 @@ namespace RSA_Parallel_Library
             return C;
         }
 
+        public static IEnumerable<string> SplitByLength(string str, int maxLength)
+        {
+            for (int index = 0; index < str.Length; index += maxLength)
+            {
+                yield return str.Substring(index, Math.Min(maxLength, str.Length - index));
+            }
+        }
+
         public string EncrRSAParalelo(string txt)
         {
-            string Mitad1;
-            string Mitad2;
-            int largoTexto = txt.Count();
-            int iMitad = largoTexto / 2;
-            Mitad1 = txt.Substring(0, iMitad);
-            Mitad2 = txt.Substring(iMitad, iMitad);
-            
-            char[] letras1 = Mitad1.ToCharArray();
-            char[] letras2 = Mitad2.ToCharArray();
-            String C1 = "";
-            String C2 = "";
-
-            Parallel.Invoke(() => 
+            int cores = Environment.ProcessorCount;
+            IEnumerable<string> texto = SplitByLength(txt, cores);
+            string[] t = texto.ToArray();
+            string res = "";
+            if (cores == 4) 
             {
-                for (int i = 0; i < letras1.Length; i++)
+                String c1="", c2="", c3="", c4 = "" ;
+                Parallel.Invoke(() =>
                 {
+                    for (int i = 0; i < t[0].ToCharArray().Length; i++)
+                    {
 
-                    C1 += (char)(Encriptar(letras1[i]));
+                        c1 += (char)(Encriptar(t[0].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[1].ToCharArray().Length; i++)
+                    {
+
+                        c2 += (char)(Encriptar(t[1].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[2].ToCharArray().Length; i++)
+                    {
+
+                        c3 += (char)(Encriptar(t[2].ToCharArray()[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < t[3].ToCharArray().Length; i++)
+                    {
+
+                        c3 += (char)(Encriptar(t[3].ToCharArray()[i]));
+                    }
                 }
- 
-            }, 
-            () => 
+                );
+                res = c1+c2+c3+c4;
+            }
+            if (cores == 6) 
             {
-                for (int i = 0; i < letras2.Length; i++)
-                {
 
-                    C2 += (char)(Encriptar(letras2[i]));
-                }
-            });
+            }
+            if (cores == 8)
+            {
+
+            }
+            /*else {
+                string Mitad1;
+                string Mitad2;
+                int largoTexto = txt.Count();
+                int iMitad = largoTexto / 2;
+                Mitad1 = txt.Substring(0, iMitad);
+                Mitad2 = txt.Substring(iMitad, iMitad);
+
+                char[] letras1 = Mitad1.ToCharArray();
+                char[] letras2 = Mitad2.ToCharArray();
+                String C1 = "";
+                String C2 = "";
+                Parallel.Invoke(() =>
+                {
+                    for (int i = 0; i < letras1.Length; i++)
+                    {
+
+                        C1 += (char)(Encriptar(letras1[i]));
+                    }
+                },
+                () =>
+                {
+                    for (int i = 0; i < letras2.Length; i++)
+                    {
+
+                        C2 += (char)(Encriptar(letras2[i]));
+                    }
+                });
+                res= C1 + C2;
             
-            return C1+C2;
+            }*/
+            return res;
+            
+            
+            
+            
+            
         }
 
         public string DesenRSAParalelo(string txt)
