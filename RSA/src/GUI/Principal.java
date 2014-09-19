@@ -213,6 +213,7 @@ public class Principal extends javax.swing.JFrame {
     Cifrado_RSA rsa = new Cifrado_RSA();
     private void btnEncripActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncripActionPerformed
         // TODO add your handling code here:
+        txtTiempo.setText("");
         String p= txtP.getText();
         String q=txtQ.getText();
         String plano=txtPlano.getText();
@@ -238,6 +239,7 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnDesenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDesenActionPerformed
         // TODO add your handling code here:
+        txtTiempo.setText("");
         String p= txtP.getText();
         String q=txtQ.getText();
         String plano=txtEncrip.getText();
