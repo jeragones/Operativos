@@ -212,7 +212,7 @@
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "RSA";
-            this.Text = "Cifrado RC4";
+            this.Text = "Cifrado ARC4";
             this.Load += new System.EventHandler(this.RSA_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

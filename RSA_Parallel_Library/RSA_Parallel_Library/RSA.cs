@@ -170,7 +170,7 @@ namespace RSA_Parallel_Library
         public string EncrRSAParalelo(string txt)
         {
             
-            int cores = 2;//Environment.ProcessorCount;
+            int cores = 4;//Environment.ProcessorCount;
             /* si utiliza el numero de cores del procesador para dividir el texto y hacer varias
                llamadas en paralelo del metodo encriptar, el tiempo de ejecucion es mas prolongado*/
             

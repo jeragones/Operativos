@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RC4_Operativos", "RSA_Operativos\RC4_Operativos.csproj", "{31E5758B-5906-4279-95A8-224D33F53DB5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARC4_Operativos", "RSA_Operativos\ARC4_Operativos.csproj", "{31E5758B-5906-4279-95A8-224D33F53DB5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

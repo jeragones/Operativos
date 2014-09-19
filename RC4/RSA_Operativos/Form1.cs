@@ -13,7 +13,7 @@ namespace RSA_Operativos
     public partial class RSA : Form
     {
 
-        RC4_Class rc4 = new RC4_Class();
+        ARC4_Class arc4 = new ARC4_Class();
 
         public RSA()
         {
@@ -40,11 +40,11 @@ namespace RSA_Operativos
             DateTime ini = DateTime.Now;
             if (paralel.Checked)
             {
-                encrip = rc4.RC4Paralelo(m, pass);
+                encrip = arc4.ARC4Paralelo(m, pass);
             }
             else
             {
-                encrip=rc4.RC4Secuencial(m, pass);
+                encrip=arc4.ARC4Secuencial(m, pass);
             }
             DateTime fin = DateTime.Now;
             TimeSpan time = new TimeSpan(fin.Ticks - ini.Ticks);
@@ -71,11 +71,11 @@ namespace RSA_Operativos
             DateTime ini = DateTime.Now;
             if (paralel.Checked)
             {
-                encrip = rc4.RC4Paralelo(m, pass);
+                encrip = arc4.ARC4Paralelo(m, pass);
             }
             else
             {
-                encrip=rc4.RC4Secuencial(m, pass);
+                encrip=arc4.ARC4Secuencial(m, pass);
             }
             DateTime fin = DateTime.Now;
             TimeSpan time = new TimeSpan(fin.Ticks - ini.Ticks);
