@@ -1,0 +1,8 @@
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\bin\Debug\Sort_Methods.exe
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\bin\Debug\Sort_Methods.pdb
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\obj\x86\Debug\Sort_Methods.Form1.resources
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\obj\x86\Debug\Sort_Methods.Properties.Resources.resources
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\obj\x86\Debug\Sort_Methods.csproj.GenerateResource.Cache
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\obj\x86\Debug\Sort_Methods.exe
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\obj\x86\Debug\Sort_Methods.pdb
+C:\Users\GeOrge\Documents\Github\Operativos\Proyecto 1\Sort_Methods\Sort_Methods\obj\x86\Debug\Sort_Methods.csprojResolveAssemblyReference.cache
