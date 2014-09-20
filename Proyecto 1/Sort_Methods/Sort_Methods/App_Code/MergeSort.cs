@@ -9,6 +9,14 @@ namespace Sort_Methods.App_Code
 {
     class MergeSort
     {
+        /// <summary>
+        /// Funcion principal, la cual se encarga de tomar el tiempo de ejecucion de los 
+        /// metodos paralelo y secuencial
+        /// </summary>
+        /// <param name="insFile">Instancia de la clase de archivos</param>
+        /// <param name="order">Orden en que se va ordenar el vector</param>
+        /// <param name="execution">Indica si la ejecución va a ser de forma paralela o secuencial</param>
+        /// <returns>Retorna el tiempo de ejecución</returns>
         public String mergeSortTime(FileClass insFile, bool order, bool execution)
         {
             List<String> lstCitizens = FileClass.lstCitizens;
@@ -29,6 +37,13 @@ namespace Sort_Methods.App_Code
             return Convert.ToString(clock.ElapsedMilliseconds) + " ms";
         }
 
+        /// <summary>
+        /// Función secuencial del metodo MergeSort
+        /// </summary>
+        /// <param name="vector">Vector de datos que se quiere ordenar</param>
+        /// <param name="left">Inicio del vector</param>
+        /// <param name="right">Final del vector</param>
+        /// <param name="order">Orden en que se va ordenar el vector</param>
         private void sequentialMergesort(List<String> vector, int left, int right, bool order)
         {
             if (left < right)
@@ -39,7 +54,15 @@ namespace Sort_Methods.App_Code
                 mergeVector(vector, left, pivot, right, order);
             }
         }
-
+        
+        /// <summary>
+        /// Función paralela del metodo MergeSort
+        /// </summary>
+        /// <param name="vector">Vector de datos que se quiere ordenar</param>
+        /// <param name="left">Inicio del vector</param>
+        /// <param name="right">Final del vector</param>
+        /// <param name="cores">Cantidad de nucleos de la computadora</param>
+        /// <param name="order">Orden en que se va ordenar el vector</param>
         private void parallelMergesort(List<String> vector, int left, int right, int cores, bool order)
         {
             if (left < right)
@@ -61,20 +84,21 @@ namespace Sort_Methods.App_Code
             }
         }
 
-
-        /* Procedure for merging two sorted array. 
-        *Note that both array are part of single array. arr1[start.....mid] and arr2[mid+1 ... end]*/
+        /// <summary>
+        /// Función encargada de unir los vectores de forma que los elementos queden ordenados
+        /// </summary>
+        /// <param name="vector">Vector de datos que se quiere ordenar</param>
+        /// <param name="left">Inicio del vector</param>
+        /// <param name="pivot">Centro del vector</param>
+        /// <param name="right">Final del vector</param>
+        /// <param name="order">Orden en que se va ordenar el vector</param>
         private void mergeVector(List<String> vector, int left,int pivot, int right, bool order)
         {
-            /* Create a temporary array for stroing merged array (Length of temp array will be 
-             * sum of size of both array to be merged)*/
-
             List<String> temp = new List<String>();
             int i = left;
             int j = pivot + 1;
             int k = 0;
 
-            // Now traverse both array simultaniously and store the smallest element of both to temp array
             while (i <= pivot && j <= right)
             {
                 if (order)
@@ -103,16 +127,14 @@ namespace Sort_Methods.App_Code
                         j++;
                     }
                 }
-                
             }
-            // If there is any element remain in first array then add it to temp array
+
             while(i <= pivot)
             {
                 temp.Add(vector[i]);
                 i++;
             }
 
-            // If any element remain in second array then add it to temp array
             while (j <= right)
             {
                 temp.Add(vector[j]);

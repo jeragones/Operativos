@@ -9,9 +9,15 @@ namespace Sort_Methods.App_Code
 {
     class FileClass
     {
+        /// <summary>
+        /// vectores de datos donde se carga la informacion de los archivos
+        /// </summary>
         public List<string> lstProvinces = new List<string>();
         public static List<string> lstCitizens = new List<string>();
 
+        /// <summary>
+        /// funcion para cargar la informacion de los archivos en los vectores
+        /// </summary>
         public void loadFile()
         {
             String[] fileName;
@@ -49,7 +55,7 @@ namespace Sort_Methods.App_Code
         /// <summary>
         /// Guarda archivos de texto en el explorador
         /// </summary>
-        /// <param name="_sTexto">texto que se va a guardar en el archivo</param>
+        /// <param name="lstResult">texto que se va a guardar en el archivo</param>
         public void saveFile(List<String> lstResult)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();

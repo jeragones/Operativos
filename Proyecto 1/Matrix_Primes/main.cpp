@@ -4,28 +4,26 @@
 #include <pthread.h>
 #include <unistd.h>
 
-
-
-
-
-#include <mutex>
-
 using namespace std;
 
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
 */
 
+// variables globales
 int** matrixA;
 int** matrixB;
 int** matrixC;
 int x[2];
 int y[2];
+bool cores = true;
 
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
 */
 
+// Funcion para llenar la matriz de valores aleatorios del 1 al 10
+// tmp: indica si es la matriz A o la matriz B
 void makeMatrix(bool tmp) {
      int num, f, c;
      if(tmp) {
@@ -37,7 +35,6 @@ void makeMatrix(bool tmp) {
      }
      for(int i=0; i < f; i++) {
           for(int j=0; j < c; j++) {
-               //num = rand() % 100 + 1;
                num = rand() % 10;
                if(tmp) {
                     matrixA[i][j] = num;
@@ -52,6 +49,8 @@ void makeMatrix(bool tmp) {
  **********************************************************************************************************************************
 */
 
+// Libera el espacio en memoria que esta ocupando la matriz
+// tmp: indica si es la matriz A o la matriz B
 void destroyMatrix(bool tmp) {
 	int f, c;
 	
@@ -78,6 +77,8 @@ void destroyMatrix(bool tmp) {
  **********************************************************************************************************************************
 */
 
+// Define las dimensiones que va a tener la matriz
+// tmp: indica si es la matriz A o la matriz B
 void matrixDimension(bool tmp) {
     string rows, cols;
     bool menu = true;
@@ -133,10 +134,7 @@ void matrixDimension(bool tmp) {
  **********************************************************************************************************************************
 */
 
-/* Description: Multiplicación de matrices
- * Params: -
- * Return: -
- */
+// Multiplicación de matrices de forma secuencial
 void multMatrix() {
      bool error = true;
      int num, z;
@@ -174,9 +172,7 @@ void multMatrix() {
 	             temp += matrixA[i][k] * matrixB[k][j];
 	     	 }
 		     matrixC[i][j] = temp;
-		     cout<< temp << " ";
 	 	 }
-	     cout<<"\n";
 	 }
      end = clock();
      cout<<"\n\n";
@@ -188,30 +184,16 @@ void multMatrix() {
      
      system("PAUSE");
 }
-
-/* Description: Multiplicación de matrices concurrente
- * Params: -
- * Return: -
- */
  
 int size;
 int n=0;
 bool get1;
 bool get2;
-//std::mutex foo,bar;
 
+// Primer proceso de ejecucion de multiplicacion de matrices paralelo
 void *multAux1(void * arg) {
-	/*lock (foo,bar);
-  	cout << "task a\n";
-  	foo.unlock();
-  	bar.unlock();*/
-	
-	
-	
-	/*while(true) {
-		while(get2) {
-			cout << "hilo 1\n";
-		}
+	while(true) {
+		while(get2) { }
 		if(get1) {
 			if(n < x[0]) {
 				for(int j=0; j < y[1]; j++) {
@@ -220,9 +202,7 @@ void *multAux1(void * arg) {
 						temp += matrixA[n][k] * matrixB[k][j];
 					}	
 					matrixC[n][j] = temp;
-					cout<< temp << " ";
 				}
-				cout<<" h1\n";
 				n++;
 			} else {
 				return 0;
@@ -230,19 +210,13 @@ void *multAux1(void * arg) {
 			get1 = false;
 			get2 = true;
 		}
-	}*/
+	}
 }
 
+// Segundo proceso de ejecucion de multiplicacion de matrices paralelo
 void *multAux2(void * arg) {
-	/*lock (bar,foo);
-  	cout << "task b\n";
-  	bar.unlock();
-  	foo.unlock();*/
-	
-	/*while(true) {
-		while(get1) {
-			cout << "hilo 2\n";
-		}
+	while(true) {
+		while(get1) { }
 		if(get2) {
 			if(n < x[0]) {
 				for(int j=0; j < y[1]; j++) {
@@ -251,9 +225,7 @@ void *multAux2(void * arg) {
 						temp += matrixA[n][k] * matrixB[k][j];
 					}	
 					matrixC[n][j] = temp;
-					cout<< temp << " ";
 				}
-				cout<<" h2\n";
 				n++;
 			} else {
 				return 0;
@@ -261,9 +233,10 @@ void *multAux2(void * arg) {
 			get2 = false;
 			get1 = true;
 		}
-	}*/
+	}
 }
 
+// Multiplicación de matrices concurrente
 void multMatrixConcurrent() {
      bool error = true;
      int num;
@@ -341,6 +314,7 @@ void multMatrixConcurrent() {
  **********************************************************************************************************************************
 */
 
+// Valida si un numero es primo o no
 bool primeNumber(int num) {
 	for(int i=2; i < num; i++) {
 		if(num % i == 0) {
@@ -350,13 +324,97 @@ bool primeNumber(int num) {
 	return true;
 }
 
-/* Description: Factorizacion de Numeros por el Metodo de los Primos
- * Params: -
- * Return: -
- */
-void factNumbers() {
+// Factorizacion de Numeros secuencial por el Metodo de los Primos
+// number: numero que se va a factorizar
+void factNumberSequential(int number) {
+     bool flag=true;
+	 int x=1;
+	 int y=1;
+	 int mult;
+	 if(primeNumber(number)) {
+	 	cout <<" \n"<<number;
+	 	return;
+	 } else {
+		while(true) {
+			if(flag) {
+				x++;
+				flag = false;
+			} else {
+				y++;
+			}
+			mult = x * y;
+			if(mult == number) {
+				break;
+			} else if(mult > number) {
+				if(flag) {
+					x--;
+					flag = false;
+				} else {
+					y--;
+					flag = true;
+				}
+			} else {
+				flag = false;
+			}
+	 	}
+	 	factNumberSequential(x);
+		factNumberSequential(y);
+	 }
+}
+
+pthread_t t1, t2;
+
+// Factorizacion de Numeros paralelo por el Metodo de los Primos
+// number: numero que se va a factorizar
+void factNumberConcurrent(int number) {
+	 bool flag=true;
+	 int x=1;
+	 int y=1;
+	 int mult;
+
+	 if(primeNumber(number)) {
+	 	return;
+	 } else {
+		while(true) {
+			if(flag) {
+				x++;
+				flag = false;
+			} else {
+				y++;
+			}
+			mult = x * y;
+			if(mult == number) {
+				break;
+			} else if(mult > number) {
+				if(flag) {
+					x--;
+					flag = false;
+				} else {
+					y--;
+					flag = true;
+				}
+			} else {
+				flag = false;
+			}
+	 	}
+	 	
+	 	if(cores) {
+	 		cores = false;
+	 		//pthread_create(&t1, 0, factNumberConcurrent, arg1);
+	 		//pthread_create(&t2, NULL, factNumberConcurrent, arg2);
+	 	} else {
+	 		factNumberConcurrent(x);
+	 		factNumberConcurrent(y);
+	 	}	
+	 }
+}
+
+ // Factorizacion de Numeros por el Metodo de los Primos
+void factNumbers(bool type) {
      string in;
      int number;
+     int *arg;
+	 clock_t start, end;
 	 
 	 system("CLS");
 	 cout<<"Numero a Factorizar: ";
@@ -364,46 +422,30 @@ void factNumbers() {
 	 
 	 number = atoi(in.c_str());
 	 
-	 for(int i=2; i < 998; i++) {
-	 	if(primeNumber(i)) {
-	 		if(number % i == 0) {
-				cout << i << " * ";
-				number /= i;
-				i=2;
-	 		}
-	 		if(primeNumber(number)) {
-	 			cout << number << " \n";
-				system("PAUSE");
-	 			return;
-	 		}
-	 	}
-	 } 
-}
-
-/* Description: Factorizacion de Numeros por el Metodo de los Primos
- * Params: -
- * Return: -
- */
-void factNumbersConcurrent() {
-     
+	 if(type) {
+	 	start = clock();
+	 	factNumberSequential(number);
+	 	end = clock();
+	 } else {
+	 	cores = true;
+	 	start = clock();
+	 	factNumberConcurrent(number);
+	 	end = clock();
+	 }
+	 
+	 cout<<"\n\n";
+     cout<< (double)(end-start)/CLOCKS_PER_SEC << " seconds." << "\n\n";
+     cout<<"\n\n";
+	 
+	 system("PAUSE");
 }
 
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
 */
 
+// Menu de logaritmos
 int main(int argc, char *argv[]) {
-	cout << Environment::ProcessorCount << "\n\n\n";
-/*
-pthread_t t1;
-
-    pthread_create(&t1, NULL, &print_message, NULL);
-    cout << "Hello";*/
-
-	
-	
-	
-	
     string op;
     bool menu = true;
     do {
@@ -424,10 +466,10 @@ pthread_t t1;
 			 multMatrixConcurrent();
              break;
         case 3 :
-			 factNumbers();
+			 factNumbers(true);
              break;
         case 4 :
-             
+             factNumbers(false);
              break;
         case 5 :
              menu = false;
@@ -437,12 +479,5 @@ pthread_t t1;
              system("PAUSE");
         }
     } while(menu);
-
-    
-    
-    
-    
-    
-    
     return 0;
 }

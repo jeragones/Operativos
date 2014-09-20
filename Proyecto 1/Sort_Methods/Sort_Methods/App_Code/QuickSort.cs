@@ -10,6 +10,14 @@ namespace Sort_Methods.App_Code
 {
     class QuickSort
     {
+        /// <summary>
+        /// Funcion principal, la cual se encarga de tomar el tiempo de ejecucion de los 
+        /// metodos paralelo y secuencial
+        /// </summary>
+        /// <param name="insFile">Instancia de la clase de archivos</param>
+        /// <param name="order">Orden en que se va ordenar el vector</param>
+        /// <param name="execution">Indica si la ejecución va a ser de forma paralela o secuencial</param>
+        /// <returns>Retorna el tiempo de ejecución</returns>
         public String quickSortTime(FileClass insFile, bool order, bool execution) 
         {
             List<String> lstCitizens = FileClass.lstCitizens;
@@ -28,6 +36,13 @@ namespace Sort_Methods.App_Code
             return Convert.ToString(clock.ElapsedMilliseconds)+" ms";
         }
 
+        /// <summary>
+        /// Función paralela del metodo QuickSort
+        /// </summary>
+        /// <param name="vector">Vector de datos que se quiere ordenar</param>
+        /// <param name="left">Inicio del vector</param>
+        /// <param name="right">Final del vector</param>
+        /// <param name="order">Orden en que se va ordenar el vector</param>
         private void sequentialQuicksort(List<String> vector, int left, int right, bool order)
         {
             int i = left;
@@ -90,7 +105,15 @@ namespace Sort_Methods.App_Code
                 sequentialQuicksort(vector, i, right, order);
             }
         }
-
+ 
+        /// <summary>
+        /// Función paralela del metodo QuickSort
+        /// </summary>
+        /// <param name="vector">Vector de datos que se quiere ordenar</param>
+        /// <param name="left">Inicio del vector</param>
+        /// <param name="right">Final del vector</param>
+        /// <param name="cores">Cantidad de nucleos de la computadora</param>
+        /// <param name="order">Orden en que se va ordenar el vector</param>
         private void parallelQuicksort(List<String> vector, int left, int right, int cores, bool order)
         {
             int i = left;
