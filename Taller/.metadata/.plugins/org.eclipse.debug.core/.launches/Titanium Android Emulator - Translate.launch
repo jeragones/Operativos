@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.appcelerator.titanium.mobile.ui.android.simulator.launchConfigurationType">
+<stringAttribute key="ATTR_PROJECT_NAME" value="Translate"/>
+<stringAttribute key="abi" value="armeabi"/>
+<stringAttribute key="device-id" value="Phone 1"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/Translate"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="process_factory_id" value="com.appcelerator.titanium.mobile.ui.androidLogLevelFilteringProcessFactory"/>
+<stringAttribute key="screen_type" value="WXGA"/>
+<stringAttribute key="sdk_version" value="3.1"/>
+</launchConfiguration>
