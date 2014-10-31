@@ -3,6 +3,7 @@
 #include <time.h>
 #include <pthread.h>
 #include <unistd.h>
+#define size 400
 
 using namespace std;
 
@@ -14,9 +15,13 @@ using namespace std;
 int** matrixA;
 int** matrixB;
 int** matrixC;
+int row1, vect, col2;
+int matrizA[size][size]; 
+int matrizB[size][size];
+int matrizC[size][size];
 int x[2];
 int y[2];
-bool cores = true;
+bool cores = false;
 
 /**********************************************************************************************************************************
  **********************************************************************************************************************************
@@ -184,130 +189,138 @@ void multMatrix() {
      
      system("PAUSE");
 }
- 
-int size;
-int n=0;
-bool get1;
-bool get2;
 
-// Primer proceso de ejecucion de multiplicacion de matrices paralelo
-void *multAux1(void * arg) {
-	while(true) {
-		while(get2) { }
-		if(get1) {
-			if(n < x[0]) {
-				for(int j=0; j < y[1]; j++) {
-					int temp = 0;
-					for(int k = 0; k < size; k++) {
-						temp += matrixA[n][k] * matrixB[k][j];
-					}	
-					matrixC[n][j] = temp;
-				}
-				n++;
-			} else {
-				return 0;
-			}
-			get1 = false;
-			get2 = true;
-		}
+/**********************************************************************************************************************************
+ **********************************************************************************************************************************
+*/
+
+// Funcion que se encarga de realizar la multiplicacion entre las matrices A,B
+// dim: dimension de la matriz 
+void *parallelMult(void *dim) {
+	int row;
+	int col;
+	int result=0;
+	int *dimension;
+	
+	dimension = (int *) dim;
+	row = dimension[0];
+	col = dimension[1];
+	
+	for(int i=0; i<vect; i++) {
+		result += matrizA[row][i] * matrizB[i][col];
+		//printf("%d * %d\n",matrizA[row][i],matrizB[i][col]);
 	}
+	//printf("         = %d\n",result);
+	
+	
+	matrizC[row][col] = result;
 }
 
-// Segundo proceso de ejecucion de multiplicacion de matrices paralelo
-void *multAux2(void * arg) {
-	while(true) {
-		while(get1) { }
-		if(get2) {
-			if(n < x[0]) {
-				for(int j=0; j < y[1]; j++) {
-					int temp = 0;
-					for(int k = 0; k < size; k++) {
-						temp += matrixA[n][k] * matrixB[k][j];
-					}	
-					matrixC[n][j] = temp;
-				}
-				n++;
-			} else {
-				return 0;
-			}
-			get2 = false;
-			get1 = true;
+// Funcion que llena las matrices con valores aleatorios del 1 al 9
+// mat: matriz que se va a llenar
+// row: cantidad de filas de la matriz
+// col: cantidad de columnas de la matriz
+void fillMatrix(int mat[size][size], int row, int col) {
+	int num;
+	
+	for(int i=0; i<row; i++) {
+		for(int j=0; j<col; j++) {
+			num = (rand() % 9) + 1;
+			mat[i][j] = num;
 		}
-	}
+	}	
 }
 
-// Multiplicación de matrices concurrente
+// Funcion para imprimir los valores de las matrices A, B, C
+void printMatrix() {
+	printf("\n");
+	for(int i=0; i<row1 ;i++) {
+		for(int j=0;j<vect;j++) {
+			if(i < row1)
+			printf(" %d ",matrizA[i][j]);
+		}
+		
+		if(i == vect / 2)
+			printf("\t*\t");
+		else
+			printf("\t\t");
+			
+		for(int j=0; j<col2; j++) {
+			if(i < vect)
+			printf(" %d ",matrizB[i][j]);
+		}
+		
+		if(i == row1 / 2)
+			printf("\t=\t");
+		else
+			printf("\t\t");
+			
+		for(int j=0; j<col2; j++) {
+			if(i < row1) {
+				printf(" %d ",matrizC[i][j]);
+			}
+		}
+				
+		printf("\n");
+	}
+	
+	printf("\n");
+}
+
+// Funcion padre para la multiplicación de matrices concurrente
 void multMatrixConcurrent() {
-     bool error = true;
-     int num;
-     int i=0;
-     int j=0;
-     clock_t start, end;
-
-     do {
-         system("CLS");
-         matrixDimension(true);
-         matrixDimension(false);
-
-         if(y[0] == x[1]) {
-             error = false;
-			 size = y[0]; 
-         } else {
-              cout<<"ERROR: LAS MATRICES NO SON CONFORMABLES.\n\n";
-              system("PAUSE");
-         }
-     } while(error);
-     
-     matrixC = new int*[x[0]];	
-	 for(int i=0; i < x[0]; i++) {
-	     matrixC[i] = new int[y[1]];	
-	 }
-     
-     makeMatrix(true);
-     makeMatrix(false);
-     
-     system("CLS");
+    int dimension[2];
+	pthread_t m[size][size];
+	clock_t start, end;
+	system("CLS");
+	cout<<"\n***** Dimension de la Primera Matriz *****\n\n\n";
+	printf("filas: ");
+	scanf("%d",&row1);
 	
-	cout << "\n matrixA \n\n";
-	for(int i=0; i < x[0]; i++) {
-		for(int j=0; j < y[0]; j++) {
-			cout << " " << matrixA[i][j] << " ";
-		}
-		cout << "\n";
+	
+	printf("Columnas: ");
+	scanf("%d",&vect);
+	printf("\n");
+	
+	fillMatrix(matrizA, row1, vect);
+	
+	cout<<"\n***** Dimension de la Segunda Matriz *****\n\n\n";
+	printf("Columnas: ");
+	scanf("%d",&col2);
+	printf("\n");
+	
+	fillMatrix(matrizB, vect, col2);
+
+	for(int i=0; i<row1; ++i){
+		for(int j=0; j<col2; ++j){
+        	matrizC[i][j] = 0;
+        }
 	}
-	
-	cout << "\n matrixB \n\n";
-	
-	for(int i=0; i < x[1]; i++) {
-		for(int j=0; j < y[1]; j++) {
-			cout << " " << matrixB[i][j] << " ";
+    system("PAUSE");
+        
+	start = clock();
+	for(int i=0; i<row1; i++) {
+		for(int j=0; j<col2; j++) {
+			dimension[0]= i;
+			dimension[1]= j;
+			pthread_create(&m[i][j], NULL, parallelMult, dimension);
 		}
-		cout << "\n";
 	}
+		
+	end = clock();
 	
-	cout << "\n matrixC \n\n";
+	cout<<"\n\n";
+ 	cout<< (double)(end-start)/CLOCKS_PER_SEC << " seconds." << "\n\n";
+ 	cout<<"\n\n\n\n";
+
+	system("PAUSE");
 	
-     start = clock();
-
-	 get1 = true;
-	 get2 = false;
-	 pthread_t t1, t2;
-	 pthread_create(&t1, NULL, multAux1, NULL);
-     pthread_create(&t2, NULL, multAux2, NULL);
-	 
-     end = clock();
-     
-     pthread_cancel(t1);
-     pthread_cancel(t2);
-     
-	 cout<<"\n\n";
-     cout<< (double)(end-start)/CLOCKS_PER_SEC << " seconds." << "\n\n";
-     cout<<"\n\n";
-
-     destroyMatrix(true);
-     destroyMatrix(false);
-     
-     system("PAUSE");
+	cout<<"\n\n\n Impresion \n\n\n";
+	printMatrix();
+	
+	system("PAUSE");
+	
+	cout<<endl;
 }
 
 /**********************************************************************************************************************************
@@ -315,6 +328,7 @@ void multMatrixConcurrent() {
 */
 
 // Valida si un numero es primo o no
+// num: numero que se quiere comprobar si es primo o no
 bool primeNumber(int num) {
 	for(int i=2; i < num; i++) {
 		if(num % i == 0) {
@@ -373,7 +387,8 @@ void factNumberConcurrent(int number) {
 	 int mult;
 
 	 if(primeNumber(number)) {
-	 	return;
+	 	cout <<" \n"<<number;
+		 return;
 	 } else {
 		while(true) {
 			if(flag) {
@@ -398,18 +413,19 @@ void factNumberConcurrent(int number) {
 			}
 	 	}
 	 	
-	 	if(cores) {
-	 		cores = false;
+	 	//if(cores) {
+	 	//	cores = false;
 	 		//pthread_create(&t1, 0, factNumberConcurrent, arg1);
 	 		//pthread_create(&t2, NULL, factNumberConcurrent, arg2);
-	 	} else {
+	 	//} else {
 	 		factNumberConcurrent(x);
 	 		factNumberConcurrent(y);
-	 	}	
+	 	//}	
 	 }
 }
 
  // Factorizacion de Numeros por el Metodo de los Primos
+ // type: indica cual metodo ejecutar si el secuencial o el paralelo
 void factNumbers(bool type) {
      string in;
      int number;
@@ -444,7 +460,7 @@ void factNumbers(bool type) {
  **********************************************************************************************************************************
 */
 
-// Menu de logaritmos
+// Metodo principal el cual contiene el Menu principal de los logaritmos
 int main(int argc, char *argv[]) {
     string op;
     bool menu = true;

@@ -1,0 +1,15 @@
+=run
+HolaMundo\:launchMode=run
+HolaMundo\:launchShortcut=com.appcelerator.titanium.mobile.ui.android.device.launchShortcut
+LAST_LAUNCH_TIMESTAMP=1411691355903
+Prueba\:launchMode=run
+Prueba\:launchShortcut=com.appcelerator.titanium.mobile.ui.android.simulator.launchShortcut.Phone 1
+Translate\:launchMode=run
+Translate\:launchShortcut=com.appcelerator.titanium.mobile.ui.android.simulator.launchShortcut.Phone 1
+Translator\:launchMode=run
+Translator\:launchShortcut=com.appcelerator.titanium.mobile.ui.android.simulator.launchShortcut.AndroidEmulador
+eclipse.preferences.version=1
+preference.show.console.onError=true
+preference.studio.perspective.version=103
+test00\:launchMode=run
+test00\:launchShortcut=com.appcelerator.titanium.mobileweb.ui.preview.launchShortcut

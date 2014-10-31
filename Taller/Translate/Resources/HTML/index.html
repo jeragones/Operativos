@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Traductor</title>
+        <link href="styles/main.css" rel="stylesheet" type="text/css" />
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
+        <script src="intelxdk.js"></script>
+        <script src='cordova.js'></script> 
+        <script src='xhr.js'></script>        
+    </head>
+    <body>
+        <div id="home" title="Ejemplo de Traductor">
+            <header data-role="header">
+                <div data-role="navbar">
+                    <span data-role="view-title">Traductor</span>
+                </div>
+            </header>
+        </div>
+        <div>
+            <label for="sourceLanguage">From:</label>
+            <select id="sourceLanguage" name="sourceLanguage"></select>
+            <label for="destLanguage">To:</label>
+            <select id="destLanguage" name="destLanguage"></select>
+            <br>
+            <label for="translateText">Text to translate: </label>
+            <input type="search" class="tlt" name="translateText" id="translateText" placeholder="text" data-mini="true"     />
+            <br>
+            <label for="translatedText">Translated text: </label>
+            <input type="text" class="tlt" name="translatedText" id="translatedText" data-mini="true" disabled />
+            <br>
+            <button id="submit" onclick="translate()">Translate</button>
+        </div>
+        <script src="scripts/main.js" type="text/javascript"></script>
+    </body>
+</html>
