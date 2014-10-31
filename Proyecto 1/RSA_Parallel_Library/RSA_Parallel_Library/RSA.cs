@@ -169,10 +169,8 @@ namespace RSA_Parallel_Library
         /// <returns></returns>
         public string EncrRSAParalelo(string txt)
         {
-            
-            int cores = 2;//Environment.ProcessorCount;
-            /* si utiliza el numero de cores del procesador para dividir el texto y hacer varias
-               llamadas en paralelo del metodo encriptar, el tiempo de ejecucion es mas prolongado*/
+            // toma la cantidad de cores que tiene el procesador
+            int cores = 2;// Environment.ProcessorCount;
             
             string[] t = splicer(txt,cores);
             string res = "";
@@ -362,9 +360,9 @@ namespace RSA_Parallel_Library
         /// <returns></returns>
         public string DesenRSAParalelo(string txt)
         {
-            int cores = 2;//Environment.ProcessorCount;
-            /* si utiliza el numero de cores del procesador para dividir el texto y hacer varias
-               llamadas en paralelo del metodo encriptar, el tiempo de ejecucion es mas prolongado*/
+            // toma la cantidad de cores que tiene el procesador
+            int cores = Environment.ProcessorCount;
+            
 
             string[] t = splicer(txt, cores);
             string res = "";
