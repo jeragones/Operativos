@@ -23,10 +23,10 @@ namespace ironmq
         private void button1_Click(object sender, EventArgs e)
         {
             var cantidad = cant.Value;
-            string msg = mens.Text;
+            
             for (int i = 1; i <= cantidad; i++)
             {
-                cliente.sendMessage("Mensaje: "+msg+ " Desde: App1");
+                cliente.sendMessage("Prueba Desde App1");
                 //inbox.Text = inbox.Text + "Mensaje Numero: " + i + " Mensaje: " + msg + " Desde: App1\n";
                 /*object[] res = cliente.ibox();
                 ArrayList msgs = (ArrayList)res[0];
@@ -40,17 +40,7 @@ namespace ironmq
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            inbox.Text = "";
-            object[] res = cliente.ibox();
-            ArrayList msgs = (ArrayList)res[0];
-            cola.Text = "Cola: " + res[1];
-            foreach (String mg in msgs)
-            {
-                inbox.Text = inbox.Text + mg + "\n";
-            }
-        }
+        
 
        
     }
