@@ -5,11 +5,11 @@ var data = require('./data');
 
 var token = "2aps7Lb4F3hMYwtkaVj9xadlRwo";
 var id = "545413c2b72d650009000009";
-var queue = "EntryQueue";
+
 
 var router = express.Router();
 var imq = new iron_mq.Client({token: token, project_id: id, queue_name: queue});
-var queue = imq.queue("EntryQueue");
+var queue = imq.queue("inbox");
 /* GET Message page */
 
 router.get('/', function(req, res) {
@@ -33,8 +33,8 @@ router.get('/', function(req, res) {
 });
 
 router.get('/app2', function(req, res) {
-	for(var i=0; i < 100; i++){
-		queue.post('prueba desde app 2', function(error, body) { });	
+	for(var i=0; i < 20; i++){
+		queue.post('Prueba '+i+' Desde App2', function(error, body) { });	
 	}
 
   	res.render('index', { title: 'View Messages' });

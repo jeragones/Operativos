@@ -15,7 +15,7 @@ namespace ironmq
         public void sendMessage(String mens)
         {
             // Get a Queue object
-            QueueClient queue = ironMq.Queue("EntryQueue");
+            QueueClient queue = ironMq.Queue("inbox");
             
             // Put a message on the queue
             string messageId = @queue.Post(mens);
@@ -39,7 +39,7 @@ namespace ironmq
         public object[] ibox()
         {
             object[] res = new object[2]; 
-            QueueClient queue = ironMq.Queue("EntryQueue");
+            QueueClient queue = ironMq.Queue("inbox");
 
             MessageCollection messages = queue.Get(n: 2, timeout: 60);
             // You can specify only parameters you need:

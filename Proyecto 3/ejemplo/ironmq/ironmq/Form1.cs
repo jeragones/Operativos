@@ -24,9 +24,9 @@ namespace ironmq
         {
             var cantidad = cant.Value;
             
-            for (int i = 1; i <= cantidad; i++)
+            for (int i = 0; i < cantidad; i++)
             {
-                cliente.sendMessage("Prueba Desde App1");
+                cliente.sendMessage("Prueba "+i+ " Desde App1");
                 //inbox.Text = inbox.Text + "Mensaje Numero: " + i + " Mensaje: " + msg + " Desde: App1\n";
                 /*object[] res = cliente.ibox();
                 ArrayList msgs = (ArrayList)res[0];
