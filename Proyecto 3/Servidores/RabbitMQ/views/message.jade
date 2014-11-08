@@ -1,0 +1,9 @@
+extends layout
+
+block content
+	form(method="POST" action="message")
+		div(class="col-xs-5")
+			div(class="form-group col-md-13 text-right")
+				input(type="submit" class="btn btn-primary" value="Enviar Mensaje")
+			table(class="form-group col-md-13 text-right")
+				| lista de mensajes

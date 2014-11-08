@@ -1,0 +1,45 @@
+extends layout
+
+block content
+	form(method="POST" action="/")
+		div(class="col-xs-4")
+			div(class="form-group text-left")
+				label Total de mensajes: #{total}
+			for message in data
+				div(class="form-group col-xs-7 text-left")
+						if message.client == 'App 1'
+							div.panel.panel-info
+								div.panel-heading
+									h3.panel-title
+										span(class="fa fa-line-chart") #{message.client}
+								div.panel-body
+									table(class="table table-user-information")
+										thead
+											tr
+												td 
+													strong ID
+												td 
+													strong Hora
+										tbody
+											tr
+												td #{message.num}
+												td #{message.time}
+						else
+							div.panel.panel-success
+								div.panel-heading
+									h3.panel-title
+										span(class="fa fa-line-chart") #{message.client}
+								div.panel-body
+									table(class="table table-user-information")
+										thead
+											tr
+												td 
+													strong ID
+												td 
+													strong Hora
+										tbody
+											tr
+												td #{message.id}
+												td #{message.time}
+			div(class="form-group text-right")
+				input(type="submit" class="btn btn-danger" name="btnRemove" value="Eliminar Mensajes")
