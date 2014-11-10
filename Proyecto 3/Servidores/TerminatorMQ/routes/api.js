@@ -20,7 +20,7 @@ router.get('/get', function(req, res) {
 	if(queue.length > 0)
 		res.json(queue.shift());
 	else
-		res.json({error: 'empty'});
+		res.send({error: 'empty'});// json({error: 'empty'});
 });
 
 module.exports = router;

@@ -12,3 +12,11 @@ block content
 		div
 			h4 Total de mensajes
 			h1(id="msgTotal")
+	aside
+		form(method="POST" action="/")
+			select(name="selWorkers")
+				option(value="1") 1 Worker
+				option(value="2") 2 Workers 
+				option(value="3") 3 Workers
+				option(value="4") 4 Workers
+			input(type="submit" class="btn btn-primary" value="Iniciar")

@@ -15,13 +15,22 @@ router.get('/', function(req, res) {
 
 /* POST Index Page Inicia los workers */
 router.post('/', function(req, res) {
-	var maxWorkers = req.body.cmbWorkers;
-	var process = new Wrokers(queue, {maxWorkers: maxWorkers});
-	process.spawn(function(data) {
-		var message = queue.shift();
-		data.save(message.num, message.client, message.time);
-	});
+	var maxWorkers = req.body.selWorkers;
+	console.log(queue.length);
+	if(queue.length > 0) {
+		var process = new Workers(queue, {maxWorkers: maxWorkers});
+		process.map(save/*function(message) {
+			//var message = queue.shift();
+			
+		}*/);
+	}
+	res.render('index', {title: 'TerminatorMQ'});
 });
+
+var save = function(message) {
+	console.log(message);
+	data.save(message.num, message.client, message.time);
+}
 
 /* GET Lleva el estado del servidor de mensajes */
 router.get('/refresh', function(req, res) {

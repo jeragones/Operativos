@@ -22,6 +22,8 @@ function saveMessage(num, client, time) {
 	db.Message.save({num: num, client: client, time: time}, function(err, saved) { 
 		if(err) 
 			console.log('Message not inserted by DB ERROR');
+		else
+			console.log('insertado');
 	});
 }
 
