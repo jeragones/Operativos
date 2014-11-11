@@ -1,0 +1,44 @@
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\consumer.exe.config
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\consumer.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\consumer.pdb
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\AddClient.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\AddServer.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\DeclareQueue.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\ExceptionTest.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\LogTail.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\LowlevelLogTail.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\PerfTest.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\RabbitMQ.ServiceModel.dll
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\SendMap.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\SendString.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\ShutdownableClient.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\ShutdownableServer.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\SingleGet.exe
+C:\Users\Daniel\Desktop\consumer\consumer\bin\Debug\Subscriber.exe
+C:\Users\Daniel\Desktop\consumer\consumer\obj\Debug\consumer.Properties.Resources.resources
+C:\Users\Daniel\Desktop\consumer\consumer\obj\Debug\consumer.csproj.GenerateResource.Cache
+C:\Users\Daniel\Desktop\consumer\consumer\obj\Debug\consumer.exe
+C:\Users\Daniel\Desktop\consumer\consumer\obj\Debug\consumer.pdb
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\consumer.exe.config
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\obj\Debug\consumer.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\obj\Debug\consumer.pdb
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\consumer.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\consumer.pdb
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\AddClient.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\AddServer.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\DeclareQueue.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\ExceptionTest.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\LogTail.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\LowlevelLogTail.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\PerfTest.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\RabbitMQ.ServiceModel.dll
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\SendMap.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\SendString.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\ShutdownableClient.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\ShutdownableServer.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\SingleGet.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\bin\Debug\Subscriber.exe
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\obj\Debug\consumer.csprojResolveAssemblyReference.cache
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\obj\Debug\consumer.Form1.resources
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\obj\Debug\consumer.Properties.Resources.resources
+C:\Users\Daniel\Documents\GitHub\Operativos\Proyecto 3\C#\consumer\consumer\obj\Debug\consumer.csproj.GenerateResource.Cache
