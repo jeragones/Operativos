@@ -8,6 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net;
+
+
+using System.IO;
 
 namespace ironmq
 {
@@ -28,22 +32,33 @@ namespace ironmq
             for (int i = 0; i < cantidad; i++)
             {
                 DateTime time = DateTime.Now;
-                if (cbIron.Checked && !cbRabbit.Checked)
+                if (iron.Checked)
                 {
                     Console.WriteLine("Iron");
                     cliente.sendMessage(i + "-App 1-" + time.Hour + ":" + time.Minute + ":" + time.Second + ":" + time.Millisecond);
                 }
-                else if (cbRabbit.Checked && !cbIron.Checked) 
+                else if (rabbit.Checked) 
                 {
                     Console.WriteLine("Rabbit");
                     rcliente.Producer(i + "-App 1-" + time.Hour + ":" + time.Minute + ":" + time.Second + ":" + time.Millisecond);
                     
                 }
-                else if (cbIron.Checked && cbRabbit.Checked) 
+                else if (terminator.Checked) 
                 {
-                    Console.WriteLine("ambos");
+                    // abre una pestaña por cada iteracion de for.. 
+                    //System.Diagnostics.Process.Start(url);
+                    string url = "http://172.24.19.79:3000/api/post?message=" + i + "-App+2-12%3A23%3A23%3A123";
+                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                    
+                    Console.WriteLine("terminatorMQ ");
                 }
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         

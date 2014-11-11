@@ -38,6 +38,7 @@ public class Client extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("App 2");
 
         jLabel1.setText("Cantidad de Mensajes a Enviar");
 

@@ -31,8 +31,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.cant = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
-            this.cbIron = new System.Windows.Forms.CheckBox();
-            this.cbRabbit = new System.Windows.Forms.CheckBox();
+            this.iron = new System.Windows.Forms.RadioButton();
+            this.rabbit = new System.Windows.Forms.RadioButton();
+            this.terminator = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.cant)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,12 +55,12 @@
             0,
             0});
             this.cant.Name = "cant";
-            this.cant.Size = new System.Drawing.Size(160, 20);
+            this.cant.Size = new System.Drawing.Size(233, 20);
             this.cant.TabIndex = 6;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(97, 77);
+            this.button1.Location = new System.Drawing.Point(170, 74);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 7;
@@ -67,39 +68,54 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // cbIron
+            // iron
             // 
-            this.cbIron.AutoSize = true;
-            this.cbIron.Location = new System.Drawing.Point(15, 51);
-            this.cbIron.Name = "cbIron";
-            this.cbIron.Size = new System.Drawing.Size(61, 17);
-            this.cbIron.TabIndex = 8;
-            this.cbIron.Text = "IronMQ";
-            this.cbIron.UseVisualStyleBackColor = true;
+            this.iron.AutoSize = true;
+            this.iron.Location = new System.Drawing.Point(12, 51);
+            this.iron.Name = "iron";
+            this.iron.Size = new System.Drawing.Size(60, 17);
+            this.iron.TabIndex = 11;
+            this.iron.TabStop = true;
+            this.iron.Text = "IronMQ";
+            this.iron.UseVisualStyleBackColor = true;
             // 
-            // cbRabbit
+            // rabbit
             // 
-            this.cbRabbit.AutoSize = true;
-            this.cbRabbit.Location = new System.Drawing.Point(82, 51);
-            this.cbRabbit.Name = "cbRabbit";
-            this.cbRabbit.Size = new System.Drawing.Size(74, 17);
-            this.cbRabbit.TabIndex = 9;
-            this.cbRabbit.Text = "RabbitMQ";
-            this.cbRabbit.UseVisualStyleBackColor = true;
+            this.rabbit.AutoSize = true;
+            this.rabbit.Location = new System.Drawing.Point(78, 51);
+            this.rabbit.Name = "rabbit";
+            this.rabbit.Size = new System.Drawing.Size(73, 17);
+            this.rabbit.TabIndex = 12;
+            this.rabbit.TabStop = true;
+            this.rabbit.Text = "RabbitMQ";
+            this.rabbit.UseVisualStyleBackColor = true;
+            // 
+            // terminator
+            // 
+            this.terminator.AutoSize = true;
+            this.terminator.Location = new System.Drawing.Point(157, 51);
+            this.terminator.Name = "terminator";
+            this.terminator.Size = new System.Drawing.Size(92, 17);
+            this.terminator.TabIndex = 13;
+            this.terminator.TabStop = true;
+            this.terminator.Text = "TerminatorMQ";
+            this.terminator.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(184, 112);
-            this.Controls.Add(this.cbRabbit);
-            this.Controls.Add(this.cbIron);
+            this.ClientSize = new System.Drawing.Size(255, 109);
+            this.Controls.Add(this.terminator);
+            this.Controls.Add(this.rabbit);
+            this.Controls.Add(this.iron);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cant);
             this.Controls.Add(this.label3);
             this.Name = "Form1";
             this.Text = "App 1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.cant)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -111,8 +127,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown cant;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox cbIron;
-        private System.Windows.Forms.CheckBox cbRabbit;
+        private System.Windows.Forms.RadioButton iron;
+        private System.Windows.Forms.RadioButton rabbit;
+        private System.Windows.Forms.RadioButton terminator;
     }
 }
 
