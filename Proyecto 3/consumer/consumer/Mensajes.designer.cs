@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace consumer
+namespace Consumer
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -36,7 +36,7 @@ namespace consumer
     #endregion
 		
 		public MensajesDataContext() : 
-				base(global::consumer.Properties.Settings.Default.rabbitConnectionString, mappingSource)
+				base(global::Consumer.Properties.Settings.Default.rabbitConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

@@ -4,19 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace consumer
+namespace Consumer
 {
     class Datos
     {
-        MensajesDataContext db = new MensajesDataContext();
+        static MensajesDataContext db = new MensajesDataContext();
 
-        public void guardar(string msg) 
+        public static void guardar(string msg)
         {
             mensaje mj = new mensaje();
             mj.msg = msg;
             db.mensajes.InsertOnSubmit(mj);
             db.SubmitChanges();
         }
-
     }
 }
