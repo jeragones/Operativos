@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="rabbit" Class="MensajesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=rabbit;Integrated Security=True" SettingsObjectName="Consumer.Properties.Settings" SettingsPropertyName="rabbitConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.mensajes" Member="mensajes">
+    <Type Name="mensaje">
+      <Column Name="msg" Type="System.String" DbType="NVarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+    </Type>
+  </Table>
+</Database>
