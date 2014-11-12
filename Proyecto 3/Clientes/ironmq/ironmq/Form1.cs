@@ -48,7 +48,7 @@ namespace ironmq
                     // abre una pestaña por cada iteracion de for.. 
                     //System.Diagnostics.Process.Start(url);
                     string ips = ip.Text;
-                    string url = "http://"+ips+":3000/api/post?message=" + i + "-App+2-12%3A23%3A23%3A123";
+                    string url = "http://" + ips + ":3000/api/post?message=" + i + "-App 1-" + time.Hour + ":" + time.Minute + ":" + time.Second + ":" + time.Millisecond;
                     //HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
                     //HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
                     using (var wb = new WebClient())
