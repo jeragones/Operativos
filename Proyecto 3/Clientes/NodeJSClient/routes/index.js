@@ -15,19 +15,21 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Cliente App 2' });
 });
 
-router.post('/post', function(req, res) {
-	console.log("mijo");
-	var num = req.body.mensajes;
-	var iron = req.body.iron;
-	var terminator = req.body.terminator;
+// router.post('/post', function(req, res) {
+router.post('/', function(req, res) {
+	var num = req.body.txtMessage;
+	var iron = req.body.chkIron;
+	var terminator = req.body.chkTerminator;
+	var ip = req.body.txtIP;
+	console.log('num: '+num+', iron: '+iron+', terminator: '+terminator+', ip: '+ip);
 
-	if(iron == 1) {
+	if(iron == 0) {
 		var producer = new WorkerIron(queue, num);
 		producer.process();
 	}
 
-	if(terminator == 1) {
-		var producer = new WorkerTerminator(queue, num);
+	if(terminator == 0) {
+		var producer = new WorkerTerminator(queue, num, ip);
 		producer.process();
 	}
 
@@ -39,14 +41,16 @@ function WorkerIron(queue, number) {
     var n = number;
 
     this.process = function() {
+    	var date = new Date();
+		var time = date.getTime();
+		var message = n+'-App 2-'+getTiempo();
+    	//queue.post(message, function(error, body) {});
+    	n--;
+    	console.log(n);
+
 	    if(n > 0) {
-	    	var date = new Date();
-			var time = date.getTime();
-			var message = n+'-App 2-'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+':'+time.getMilliseconds();
-	    	queue.post(message, function(error, body) {});
-	    	n--;
+	    	setTimeout(self.process, 500);
 	    }
-        setTimeout(self.process, 500);
     }
 }
 
@@ -55,23 +59,34 @@ function WorkerTerminator(queue, number, ip) {
     var n = number;
 
     this.process = function() {
-	    if(n > 0) {
-	    	var date = new Date();
-			var time = date.getTime();
-			var message = n+'-App 2-'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+':'+time.getMilliseconds();
-	    	var options = {
-		    	hostname: ip,
-				port: 3000,
-				path: '/api/post?message='+message,
-				method: 'GET'
-			};
+    	var date = new Date();
+		var time = date.getTime();
+		var message = n+'-App 2-'+getTiempo();
+    	var options = {
+	    	hostname: ip,
+			port: 3000,
+			path: '/api/post?message='+message,
+			method: 'GET'
+		};
+		console.log(options);
+		
+		//var req = https.request(options, function(res) { });
+		//req.end();
+    	n--;
 
-			var req = https.request(options, function(res) { });
-			req.end();
-	    	n--;
-	    }
-        setTimeout(self.process, 500);
+	    if(n > 0) {
+        	setTimeout(self.process, 500);
+        }
     }
+}
+
+function getTiempo() {
+	var date = new Date();
+	var time = date.getHours()+':'+
+			   date.getMinutes()+':'+
+			   date.getSeconds()+':'+
+			   date.getMilliseconds();
+	return time;
 }
 
 module.exports = router;
