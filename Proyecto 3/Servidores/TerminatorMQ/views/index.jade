@@ -1,27 +1,48 @@
 extends layout
 
 block content
-	h1 TerminatorMQ
-	div(class="row")
-		div(class="col-md-6")
-			div 
-				h4 Tasa de Mensajes
-				h1(id="msgAverage")
-			div
-				h4 Cantidad de Mensajes
-				h1(id="msgSize")
-			div
-				h4 Total de mensajes
-				h1(id="msgTotal")
-		div(class="col-md-6")
-			h2 Queue Workers
-			div(class="row")
-				div(class="col-md-4")
-					label(for="spnWorker") Number of workers 
-					input(id="spnWorker" name="spnWorker" type="number")
-			div(class="row")
-				input(type="checkbox" id="chkWorker" name="chkWorker" value="0") 
-				span(id="txtCheckbox") 
-					|  Start Workers
-				
-				input(type="submit" class="btn btn-primary" value="Mensajes")
+
+    .container
+        h1 TerminatorMQ
+        .row
+            .col-md-4
+                .panel.panel-success
+                    .panel-heading
+                        h2.text-center Estadisticas
+                    .panel-body.text-center
+                        p.lead
+                            h5 Tasa de Mensajes
+                            h1(id="msgAverage")
+                    ul.list-group.list-group-flush.text-center
+                        li.list-group-item
+                            h5 Cantidad de Mensajes
+                            h1(id="msgSize")
+                        li.list-group-item
+                            h5 Total de mensajes
+                            h1(id="msgTotal")
+
+                    .panel-footer
+                        a.btn.btn-lg.btn-block.btn-success &#160
+            .col-md-4
+                .panel.panel-info
+                    .panel-heading
+                        h2.text-center Queue workers
+                    .panel-body.text-center
+                        .col-lg-12
+                            .form-group
+                                .input-group
+
+                                    input(id="spnWorker" name="spnWorker" type="number" class="form-control" max=10 min=1)
+                                    span.input-group-addon
+                                        span.glyphicon.glyphicon-asterisk
+
+                    ul.list-group.list-group-flush.text-center
+                        li.list-group-item
+                            input(type="checkbox" id="chkWorker" name="chkWorker" value="0")
+                            span(id="txtCheckbox")
+                                |  Start Workers
+                        li.list-group-item
+                            input(type="submit" class="btn btn-primary" value="Mensajes")
+                    .panel-footer
+
+                        a.btn.btn-lg.btn-block.btn-info &#160
