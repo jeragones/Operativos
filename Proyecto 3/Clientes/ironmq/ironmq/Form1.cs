@@ -47,10 +47,14 @@ namespace ironmq
                 {
                     // abre una pestaña por cada iteracion de for.. 
                     //System.Diagnostics.Process.Start(url);
-                    string url = "http://172.24.19.79:3000/api/post?message=" + i + "-App+2-12%3A23%3A23%3A123";
-                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
-                    HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                    
+                    string ips = ip.Text;
+                    string url = "http://"+ips+":3000/api/post?message=" + i + "-App+2-12%3A23%3A23%3A123";
+                    //HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                    //HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                    using (var wb = new WebClient())
+                    {
+                        var resp = wb.DownloadString(url);
+                    }
                     Console.WriteLine("terminatorMQ ");
                 }
             }
@@ -59,6 +63,26 @@ namespace ironmq
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void terminator_CheckedChanged(object sender, EventArgs e)
+        {
+            ip.Visible = true;
+            txtip.Visible = true;
+        }
+
+        private void rabbit_CheckedChanged(object sender, EventArgs e)
+        {
+
+            ip.Visible = false;
+            txtip.Visible = false;
+        }
+
+        private void iron_CheckedChanged(object sender, EventArgs e)
+        {
+
+            ip.Visible = false;
+            txtip.Visible = false;
         }
 
         

@@ -34,6 +34,8 @@
             this.iron = new System.Windows.Forms.RadioButton();
             this.rabbit = new System.Windows.Forms.RadioButton();
             this.terminator = new System.Windows.Forms.RadioButton();
+            this.ip = new System.Windows.Forms.TextBox();
+            this.txtip = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.cant)).BeginInit();
             this.SuspendLayout();
             // 
@@ -78,6 +80,7 @@
             this.iron.TabStop = true;
             this.iron.Text = "IronMQ";
             this.iron.UseVisualStyleBackColor = true;
+            this.iron.CheckedChanged += new System.EventHandler(this.iron_CheckedChanged);
             // 
             // rabbit
             // 
@@ -89,6 +92,7 @@
             this.rabbit.TabStop = true;
             this.rabbit.Text = "RabbitMQ";
             this.rabbit.UseVisualStyleBackColor = true;
+            this.rabbit.CheckedChanged += new System.EventHandler(this.rabbit_CheckedChanged);
             // 
             // terminator
             // 
@@ -100,6 +104,26 @@
             this.terminator.TabStop = true;
             this.terminator.Text = "TerminatorMQ";
             this.terminator.UseVisualStyleBackColor = true;
+            this.terminator.CheckedChanged += new System.EventHandler(this.terminator_CheckedChanged);
+            // 
+            // ip
+            // 
+            this.ip.Location = new System.Drawing.Point(38, 77);
+            this.ip.Name = "ip";
+            this.ip.Size = new System.Drawing.Size(126, 20);
+            this.ip.TabIndex = 14;
+            this.ip.Text = "172.24.19.79";
+            this.ip.Visible = false;
+            // 
+            // txtip
+            // 
+            this.txtip.AutoSize = true;
+            this.txtip.Location = new System.Drawing.Point(12, 80);
+            this.txtip.Name = "txtip";
+            this.txtip.Size = new System.Drawing.Size(20, 13);
+            this.txtip.TabIndex = 15;
+            this.txtip.Text = "IP:";
+            this.txtip.Visible = false;
             // 
             // Form1
             // 
@@ -107,6 +131,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(255, 109);
+            this.Controls.Add(this.txtip);
+            this.Controls.Add(this.ip);
             this.Controls.Add(this.terminator);
             this.Controls.Add(this.rabbit);
             this.Controls.Add(this.iron);
@@ -130,6 +156,8 @@
         private System.Windows.Forms.RadioButton iron;
         private System.Windows.Forms.RadioButton rabbit;
         private System.Windows.Forms.RadioButton terminator;
+        private System.Windows.Forms.TextBox ip;
+        private System.Windows.Forms.Label txtip;
     }
 }
 
