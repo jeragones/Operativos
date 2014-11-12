@@ -2,21 +2,26 @@ extends layout
 
 block content
 	h1 TerminatorMQ
-	aside
-		div 
-			h4 Tasa de Mensajes
-			h1(id="msgAverage")
-		div
-			h4 Cantidad de Mensajes
-			h1(id="msgSize")
-		div
-			h4 Total de mensajes
-			h1(id="msgTotal")
-	aside
-		form(method="POST" action="/")
-			select(name="selWorkers")
-				option(value="1") 1 Worker
-				option(value="2") 2 Workers 
-				option(value="3") 3 Workers
-				option(value="4") 4 Workers
-			input(type="submit" class="btn btn-primary" value="Iniciar")
+	div(class="row")
+		div(class="col-md-6")
+			div 
+				h4 Tasa de Mensajes
+				h1(id="msgAverage")
+			div
+				h4 Cantidad de Mensajes
+				h1(id="msgSize")
+			div
+				h4 Total de mensajes
+				h1(id="msgTotal")
+		div(class="col-md-6")
+			h2 Queue Workers
+			div(class="row")
+				div(class="col-md-4")
+					label(for="spnWorker") Number of workers 
+					input(id="spnWorker" name="spnWorker" type="number")
+			div(class="row")
+				input(type="checkbox" id="chkWorker" name="chkWorker" value="0") 
+				span(id="txtCheckbox") 
+					|  Start Workers
+				
+				input(type="submit" class="btn btn-primary" value="Mensajes")

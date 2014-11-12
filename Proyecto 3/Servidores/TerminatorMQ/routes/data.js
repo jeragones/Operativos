@@ -2,7 +2,8 @@ var mongojs = require('mongojs');
 
 // Cloud DB
 //var databaseUrl = 'mongodb://AdminDB:Admin123@ds051110.mongolab.com:51110/messagesdb';
-// Local DB
+
+/* Local DB */
 var databaseUrl = 'mongodb://localhost:27017/messagesdb';
 
 var collection = ['Message'];
@@ -18,12 +19,10 @@ function getMessages(callback) {
 	});
 }
 
-function saveMessage(num, client, time) {
-	db.Message.save({num: num, client: client, time: time}, function(err, saved) { 
+function saveMessage(message) {
+	db.Message.save(message, function(err, saved) { 
 		if(err) 
 			console.log('Message not inserted by DB ERROR');
-		else
-			console.log('insertado');
 	});
 }
 
@@ -35,4 +34,4 @@ function removeMessage(client) {
 	});	
 }
 
-module.exports = { get : getMessages, save: saveMessage, remove : removeMessage };
+module.exports = { get : getMessages, save: saveMessage, remove : removeMessage };	
