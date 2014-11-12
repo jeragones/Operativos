@@ -17,22 +17,20 @@ router.get('/', function(req, res) {
 
 // router.post('/post', function(req, res) {
 router.post('/', function(req, res) {
-	var num = req.body.txtMessage;
+	var num = req.body.spnMessage;
 	var iron = req.body.chkIron;
-	var terminator = req.body.chkTerminator;
-	var ip = req.body.txtIP;
-	console.log('num: '+num+', iron: '+iron+', terminator: '+terminator+', ip: '+ip);
+	console.log('num: '+num+', iron: '+iron);
 
-	if(iron == 0) {
+	if(iron == 1) {
 		var producer = new WorkerIron(queue, num);
 		producer.process();
 	}
-
+/*
 	if(terminator == 0) {
 		var producer = new WorkerTerminator(queue, num, ip);
 		producer.process();
 	}
-
+*/
   	res.render('index', { title: 'Cliente App 2' });
 });
 
@@ -44,39 +42,12 @@ function WorkerIron(queue, number) {
     	var date = new Date();
 		var time = date.getTime();
 		var message = n+'-App 2-'+getTiempo();
-    	//queue.post(message, function(error, body) {});
+    	queue.post(message, function(error, body) {});
     	n--;
-    	console.log(n);
 
 	    if(n > 0) {
 	    	setTimeout(self.process, 500);
 	    }
-    }
-}
-
-function WorkerTerminator(queue, number, ip) {
-    var self = this;
-    var n = number;
-
-    this.process = function() {
-    	var date = new Date();
-		var time = date.getTime();
-		var message = n+'-App 2-'+getTiempo();
-    	var options = {
-	    	hostname: ip,
-			port: 3000,
-			path: '/api/post?message='+message,
-			method: 'GET'
-		};
-		console.log(options);
-		
-		//var req = https.request(options, function(res) { });
-		//req.end();
-    	n--;
-
-	    if(n > 0) {
-        	setTimeout(self.process, 500);
-        }
     }
 }
 
@@ -90,3 +61,56 @@ function getTiempo() {
 }
 
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+function WorkerTerminator(queue, number, ip) {
+    var self = this;
+    var n = number;
+
+    this.process = function() {
+    	var date = new Date();
+		var time = date.getTime();
+		var message = n+'-App 2-'+getTiempo();
+    	var options = {
+	    	host: ip,
+			port: 3000,
+			path: '/api/post?message='+message,
+			method: 'GET',
+  			agent: false
+		};
+		console.log(options);
+		
+		https.request(options, function(res) {
+				console.log("statusCode: ", res.statusCode);
+				console.log("headers: ", res.headers);
+				res.on('data', function(d) {
+				process.stdout.write(d);
+			});
+		}).end();
+    	n--;
+
+	    if(n > 0) {
+        	setTimeout(self.process, 500);
+        }
+    }
+}
+*/

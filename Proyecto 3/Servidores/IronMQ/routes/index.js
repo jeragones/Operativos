@@ -13,9 +13,8 @@ var queue = imq.queue("inbox");
 
 /* GET index page*/ 
 router.get('/', function(req, res) {
-	setInterval(function() {
-		saveMessage(removeMessage);
-	}, 1000);
+	var consumer = new Worker();
+	consumer.process();
 	res.render('index', {title: 'Send Message', total: 0, data: []});
 });
 
@@ -38,6 +37,15 @@ router.post('/', function(req, res) {
 		res.render('index', {title: 'Messages', total: 0, data: []});
 	}
 });
+
+function Worker() {
+    var self = this;
+    
+    this.process = function() {
+	    saveMessage(removeMessage);
+        setTimeout(self.process, 500);
+    }
+}
 
 // Elimina los mensajes del servidor
 var removeMessage = function(client) {

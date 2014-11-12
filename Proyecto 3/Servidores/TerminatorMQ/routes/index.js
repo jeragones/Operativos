@@ -56,7 +56,6 @@ function Worker(queue, name) {
 	    var message = queue.getMessageSync();
 	    if (message != null) {
 	    	data.save(message);
-	        console.log(name + ' >> ' + message.num+' - '+message.client);
 	    }
         setTimeout(self.process, 500);
     }
