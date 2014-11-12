@@ -27,6 +27,28 @@ router.post('/worker', function(req, res) {
 	res.render('index', {title: 'TerminatorMQ'});
 });
 
+/* POST Index Page Inicia los workers */
+/*router.post('/', function(req, res) {
+	var workers = req.body.selWorkers;
+	while(workers > 0) {
+
+	}
+/*
+	if(queue.length > 0) {
+		var maxWorkers = req.body.selWorkers;
+		data.save(queue, maxWorkers);
+	}
+	
+	res.render('index', {title: 'TerminatorMQ'});
+});*/
+
+/* GET Lleva el estado del servidor de mensajes */
+/*router.get('/refresh', function(req, res) {
+	var size = queue.length;
+	average = Math.abs(size - average);
+	res.send({size:size, average:average, total:sizes});
+});*/
+
 function Worker(queue, name) {
     var self = this;
     
@@ -40,26 +62,5 @@ function Worker(queue, name) {
     }
 }
 
-/* POST Index Page Inicia los workers */
-router.post('/', function(req, res) {
-	var workers = req.body.selWorkers;
-	while(workers > 0) {
-
-	}
-/*
-	if(queue.length > 0) {
-		var maxWorkers = req.body.selWorkers;
-		data.save(queue, maxWorkers);
-	}
-	*/
-	res.render('index', {title: 'TerminatorMQ'});
-});
-
-/* GET Lleva el estado del servidor de mensajes */
-router.get('/refresh', function(req, res) {
-	var size = queue.length;
-	average = Math.abs(size - average);
-	res.send({size:size, average:average, total:sizes});
-});
 
 module.exports = router;
