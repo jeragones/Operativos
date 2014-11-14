@@ -1,3 +1,4 @@
+// Modulos de la ruta
 var express = require('express');
 var iron_mq = require('iron_mq');
 var data = require('./data');
@@ -28,7 +29,7 @@ router.post('/', function(req, res) {
 			var list = [];
 			var numMessages = collection.length;
 			collection.forEach( function(message) {
-				list.push({id: message.num, client: message.client, time: message.time});
+				list.push({id: message.num, client: message.client, time: message.time, server: message.server});
 			}); 
 			res.render('index', {title: 'Messages', total: numMessages, data: list});
 		});
@@ -38,12 +39,16 @@ router.post('/', function(req, res) {
 	}
 });
 
+/* Funcion de cada Worker creado 
+   queue: la cola de mensajes del servidor
+   name: nombre del worker
+*/
 function Worker() {
     var self = this;
     
     this.process = function() {
 	    saveMessage(removeMessage);
-        setTimeout(self.process, 500);
+        setTimeout(self.process, 400);
     }
 }
 
@@ -72,4 +77,5 @@ var removeDB = function() {
 	data.remove('App 2');
 }
 
+// Variable global
 module.exports = router;

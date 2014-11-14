@@ -1,15 +1,4 @@
 $(document).ready(function () {
-	/*setInterval(function() {
-		$.ajax({ 
-	        url: '/refresh',
-	        type: 'GET',
-	        contentType: 'application/json'
-	    }).success(function(data) {
-	    	$('#msgAverage').text(data.average+' msgs/s');
-	    	$('#msgSize').text(data.size+' msgs');
-	    	$('#msgTotal').text(data.total+' msgs');
-	    });
-	}, 1500);*/
 	$('#chkWorker').click(function() {
 		$('#divWorker').val(!$('#chkWorker').val())
 		
@@ -23,11 +12,10 @@ $(document).ready(function () {
 		}
 
 		$.ajax({ 
-	        url: '/worker',
+	        url: '/',
 	        type: 'POST',
 	        contentType: 'application/json',
-	        data: JSON.stringify({ chkWorker: $('#chkWorker').val(), 
-	        					   numWorker: $('#spnWorker').val() })
+	        data: JSON.stringify({ chkWorker: $('#chkWorker').val() })
 	    });
 	});
 
@@ -36,5 +24,14 @@ $(document).ready(function () {
 			$('#spnWorker').val(10);
 		else if($('#spnWorker').val() < 1)
 			$('#spnWorker').val(1);
+	});
+
+	$('#btnMessage').click(function() {
+		$.ajax({ 
+	        url: '/',
+	        type: 'POST',
+	        contentType: 'application/json',
+	        data: JSON.stringify({ btnMessage: $('#btnMessage').val() })
+	    });
 	});
 });

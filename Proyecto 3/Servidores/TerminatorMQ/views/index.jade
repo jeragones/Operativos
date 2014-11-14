@@ -5,7 +5,7 @@ block content
     .container
         h1 TerminatorMQ
         .row
-            .col-md-4
+            //.col-md-4
                 .panel.panel-success
                     .panel-heading
                         h2.text-center Estadisticas
@@ -27,22 +27,19 @@ block content
                 .panel.panel-info
                     .panel-heading
                         h2.text-center Queue workers
-                    .panel-body.text-center
+                    //.panel-body.text-center
                         .col-lg-12
                             .form-group
                                 .input-group
-
                                     input(id="spnWorker" name="spnWorker" type="number" class="form-control" max=10 min=1)
                                     span.input-group-addon
                                         span.glyphicon.glyphicon-asterisk
-
                     ul.list-group.list-group-flush.text-center
                         li.list-group-item
                             input(type="checkbox" id="chkWorker" name="chkWorker" value="0")
                             span(id="txtCheckbox")
                                 |  Start Workers
-                        li.list-group-item
-                            input(type="submit" class="btn btn-primary" value="Mensajes")
+                        //li.list-group-item
+                            input(type="submit" class="btn btn-primary" id="btnMessage" value="Messages")
                     .panel-footer
-
                         a.btn.btn-lg.btn-block.btn-info &#160

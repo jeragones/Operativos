@@ -1,12 +1,13 @@
+// Modulos de la ruta
 var express = require('express');
-//var worker = require('child_process');
 var iron_mq = require('iron_mq');
 var data = require('./data');
 
+var router = express.Router();
+
+// Conexion con el servidor de colas IronMQ
 var token = "2aps7Lb4F3hMYwtkaVj9xadlRwo";
 var id = "545413c2b72d650009000009";
-
-var router = express.Router();
 var imq = new iron_mq.Client({token: token, project_id: id, queue_name: queue});
 var queue = imq.queue("inbox");
 
@@ -18,6 +19,7 @@ router.get('/', function(req, res) {
 	res.render('message', { title: 'Send Message' });
 });
 
+/* POST Message Page */
 router.post('/', function(req, res) {
 	data.get(function(data) {
 		var numMessages = data.length;
@@ -27,20 +29,5 @@ router.post('/', function(req, res) {
 	});
 });
 
-var removeMessage = function(id) {
-	if(id)
-		queue.del(id, function(error, body) { });
-}
-
-var saveMessage = function(callback) {
-	queue.get_n(100, function(error, body) {
-		if(body[0] !== undefined) {
-			data.save(body[0].body,'funciona');
-			callback(body[0].id);
-		} else { 
-			callback(null);
-		}
-	});
-}
-
+// Variable global
 module.exports = router;

@@ -1,25 +1,29 @@
+// Modulos de la ruta
 var express = require('express');
+var os = require('os');
 var api = require('./api');
 var data = require('./data');
-
 var router = express.Router();
+
+// Cola de mensajes
 var queue = api.queue;
 
-//var consumer1 = new Consumer(queue, 'First Consumer', consumer1);
-//var consumer2 = new Consumer(queue, 'Second Consumer', consumer1);
-
-/* GET Index Page*/
+/* GET Index Page
+   Carga la pagina al abrir el link
+*/
 router.get('/', function(req, res) {
 	res.render('index', {title: 'TerminatorMQ'});
 });
 
-router.post('/worker', function(req, res) {
+/* POST Index for workers
+   Se ejecuta al seleccionar el submit e inicia los workers
+*/
+router.post('/', function(req, res) {
 	var state = req.body.chkWorker;
-	var numWorkers = req.body.numWorker;
+	var numWorkers = os.cpus().length;
+	
 	if(state == 1) {
-		if(numWorkers < 1)
-			numWorkers = 1;
-		for(var i=1; i <= numWorkers; i++) {
+		for (var i = 0; i < 2/*numWorkers*/; i++) {
 			var consumer = new Worker(queue, 'WORKER '+i);
 			consumer.process();
 		}
@@ -27,28 +31,10 @@ router.post('/worker', function(req, res) {
 	res.render('index', {title: 'TerminatorMQ'});
 });
 
-/* POST Index Page Inicia los workers */
-/*router.post('/', function(req, res) {
-	var workers = req.body.selWorkers;
-	while(workers > 0) {
-
-	}
-/*
-	if(queue.length > 0) {
-		var maxWorkers = req.body.selWorkers;
-		data.save(queue, maxWorkers);
-	}
-	
-	res.render('index', {title: 'TerminatorMQ'});
-});*/
-
-/* GET Lleva el estado del servidor de mensajes */
-/*router.get('/refresh', function(req, res) {
-	var size = queue.length;
-	average = Math.abs(size - average);
-	res.send({size:size, average:average, total:sizes});
-});*/
-
+/* Funcion de cada Worker creado 
+   queue: la cola de mensajes del servidor
+   name: nombre del worker
+*/
 function Worker(queue, name) {
     var self = this;
     
@@ -56,10 +42,10 @@ function Worker(queue, name) {
 	    var message = queue.getMessageSync();
 	    if (message != null) {
 	    	data.save(message);
-	    }
-        setTimeout(self.process, 500);
+	    } 
+        setTimeout(self.process, 400);
     }
 }
 
-
+// Variable global
 module.exports = router;

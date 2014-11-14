@@ -1,3 +1,4 @@
+// Modulos de la ruta
 var mongojs = require('mongojs');
 
 // Cloud DB
@@ -6,9 +7,11 @@ var mongojs = require('mongojs');
 /* Local DB */
 var databaseUrl = 'mongodb://localhost:27017/messagesdb';
 
+// Variables referentes a la base de datos
 var collection = ['Message'];
 var db = mongojs.connect(databaseUrl, collection);
 
+/* Obtiene los mensajes de la base de datos */
 function getMessages(callback) {
 	db.Message.find({}, function(err, message) {
 	  	if( err || !message) {
@@ -19,6 +22,7 @@ function getMessages(callback) {
 	});
 }
 
+/* Guarda los mensajes en la base de datos */ 
 function saveMessage(message) {
 	db.Message.save(message, function(err, saved) { 
 		if(err) 
@@ -26,7 +30,7 @@ function saveMessage(message) {
 	});
 }
 
-
+/* Elimina los mensajes de la base de datos */
 function removeMessage(client) {
 	db.Message.remove({message: client}, function(err, removed) {
 		if(err) 
@@ -34,4 +38,5 @@ function removeMessage(client) {
 	});	
 }
 
+// Variables globales
 module.exports = { get : getMessages, save: saveMessage, remove : removeMessage };	

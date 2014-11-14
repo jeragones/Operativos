@@ -19,7 +19,11 @@ $(document).ready(function () {
 	});
 
 	$('#btnEnviar').click(function() {
-		if($('#chkTerminator').val() == 1) {
+		$.ajax({ 
+	        url: '/',
+	        type: 'POST'
+	    });
+	    if($('#chkTerminator').val() == 1) {
 			
 			var msgs = $("#spnMessage").val();
 			var i = 1;
@@ -35,13 +39,5 @@ $(document).ready(function () {
 				i++;
 			}
 		}
-		$.ajax({ 
-	        url: '/',
-	        type: 'POST'/*,
-	        ontentType: 'application/json',
-	        data: JSON.stringify({ num: $('#spnMessage').val(),
-	        					   iron: $('#chkIron').val()
-	    	});*/
-	    });
 	});
 });

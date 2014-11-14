@@ -1,40 +1,40 @@
+// Modulos de la ruta
 var express = require('express');
 var iron_mq = require('iron_mq');
 var https = require('https');
 
+var router = express.Router();
+
+// Conexion con el servidor de colas
 var token = "2aps7Lb4F3hMYwtkaVj9xadlRwo";
 var id = "545413c2b72d650009000009";
-
-var router = express.Router();
 var imq = new iron_mq.Client({token: token, project_id: id, queue_name: queue});
 var queue = imq.queue("inbox");
-/* GET Message page */
 
 /* GET home page. */
 router.get('/', function(req, res) {
   res.render('index', { title: 'Cliente App 2' });
 });
 
-// router.post('/post', function(req, res) {
+/* POST home page */
 router.post('/', function(req, res) {
 	var num = req.body.spnMessage;
 	var iron = req.body.chkIron;
-	console.log('num: '+num+', iron: '+iron);
+	var terminator = req.body.terminator;
 
 	if(iron == 1) {
-		var producer = new WorkerIron(queue, num);
+		var producer = new Worker(queue, num);
 		producer.process();
 	}
-/*
-	if(terminator == 0) {
-		var producer = new WorkerTerminator(queue, num, ip);
-		producer.process();
-	}
-*/
+
   	res.render('index', { title: 'Cliente App 2' });
 });
 
-function WorkerIron(queue, number) {
+/* Funcion de cada Worker creado 
+   queue: la cola de mensajes del servidor
+   name: nombre del worker
+*/
+function Worker(queue, number) {
     var self = this;
     var n = number;
 
@@ -46,11 +46,12 @@ function WorkerIron(queue, number) {
     	n--;
 
 	    if(n > 0) {
-	    	setTimeout(self.process, 500);
+	    	setTimeout(self.process, 400);
 	    }
     }
 }
 
+/* Funcion para obtener el tiempo en que se gestiona cada mensaje */
 function getTiempo() {
 	var date = new Date();
 	var time = date.getHours()+':'+
@@ -60,57 +61,5 @@ function getTiempo() {
 	return time;
 }
 
+// variable global
 module.exports = router;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-function WorkerTerminator(queue, number, ip) {
-    var self = this;
-    var n = number;
-
-    this.process = function() {
-    	var date = new Date();
-		var time = date.getTime();
-		var message = n+'-App 2-'+getTiempo();
-    	var options = {
-	    	host: ip,
-			port: 3000,
-			path: '/api/post?message='+message,
-			method: 'GET',
-  			agent: false
-		};
-		console.log(options);
-		
-		https.request(options, function(res) {
-				console.log("statusCode: ", res.statusCode);
-				console.log("headers: ", res.headers);
-				res.on('data', function(d) {
-				process.stdout.write(d);
-			});
-		}).end();
-    	n--;
-
-	    if(n > 0) {
-        	setTimeout(self.process, 500);
-        }
-    }
-}
-*/
