@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	//setInterval(function() {
+	setInterval(function() {
 		$.ajax({ 
 	        url: '/message/refresh',
 	        type: 'GET',
@@ -45,5 +45,5 @@ $(document).ready(function () {
 	    	});
 	    	*/
 	    });
-	//}, 1500);
+	}, 1500);
 });

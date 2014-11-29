@@ -23,7 +23,7 @@ router.post('/', function(req, res) {
 	var numWorkers = os.cpus().length;
 	
 	if(state == 1) {
-		for (var i = 0; i < 2/*numWorkers*/; i++) {
+		for (var i = 0; i < numWorkers; i++) {
 			var consumer = new Worker(queue, 'WORKER '+i);
 			consumer.process();
 		}
